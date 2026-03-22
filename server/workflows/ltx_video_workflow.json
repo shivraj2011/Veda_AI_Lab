@@ -1,0 +1,117 @@
+{
+  "1": {
+    "inputs": {
+      "unet_name": "ltx-video-2b-v0.9-Q5_1.gguf"
+    },
+    "class_type": "UnetLoaderGGUF",
+    "_meta": {
+      "title": "Load LTX-Video GGUF"
+    }
+  },
+  "2": {
+    "inputs": {
+      "text": "A close up shot of a robotic eye, highly detailed, neon lights, 4k",
+      "clip": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Positive Prompt"
+    }
+  },
+  "3": {
+    "inputs": {
+      "width": 768,
+      "height": 512,
+      "length": 64,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentVideo",
+    "_meta": {
+      "title": "Empty Latent Video"
+    }
+  },
+  "4": {
+    "inputs": {
+      "seed": 42,
+      "steps": 20,
+      "cfg": 3,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "2",
+        0
+      ],
+      "negative": [
+        "2",
+        0
+      ],
+      "latent_image": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler (Video)"
+    }
+  },
+  "5": {
+    "inputs": {
+      "samples": [
+        "4",
+        0
+      ],
+      "vae": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "6": {
+    "inputs": {
+      "images": [
+        "5",
+        0
+      ],
+      "filename_prefix": "nexus_video",
+      "fps": 24,
+      "format": "video/h264-mp4"
+    },
+    "class_type": "VideoCombine",
+    "_meta": {
+      "title": "Video Combine"
+    }
+  },
+  "7": {
+    "inputs": {
+      "clip_name1": "t5xxl_fp16.safetensors",
+      "clip_name2": "clip_l.safetensors",
+      "type": "ltxv"
+    },
+    "class_type": "DualCLIPLoader",
+    "_meta": {
+      "title": "DualCLIP Loader (LTXV)"
+    }
+  },
+  "8": {
+    "inputs": {
+      "vae_name": "LTX23_video_vae_bf16.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "VAE Loader"
+    }
+  }
+}

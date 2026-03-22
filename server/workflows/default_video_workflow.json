@@ -1,0 +1,93 @@
+{
+    "3": {
+        "inputs": {
+            "seed": 156680208700286,
+            "steps": 20,
+            "cfg": 8,
+            "sampler_name": "euler",
+            "scheduler": "normal",
+            "denoise": 1,
+            "model": [
+                "4",
+                0
+            ],
+            "positive": [
+                "6",
+                0
+            ],
+            "negative": [
+                "7",
+                0
+            ],
+            "latent_image": [
+                "5",
+                0
+            ]
+        },
+        "class_type": "KSampler"
+    },
+    "4": {
+        "inputs": {
+            "ckpt_name": "wan22EnhancedNSFWSVICamera_nolightningSVICfFp8H.safetensors"
+        },
+        "class_type": "CheckpointLoaderSimple"
+    },
+    "5": {
+        "inputs": {
+            "width": 1024,
+            "height": 576,
+            "batch_size": 1
+        },
+        "class_type": "EmptyLatentImage"
+    },
+    "6": {
+        "inputs": {
+            "text": "A cinematic movie shot of a cyberpunk city, rain, neon lights, 8k, detailed",
+            "clip": [
+                "10",
+                0
+            ]
+        },
+        "class_type": "CLIPTextEncode"
+    },
+    "7": {
+        "inputs": {
+            "text": "text, watermark, low quality, blurry",
+            "clip": [
+                "10",
+                0
+            ]
+        },
+        "class_type": "CLIPTextEncode"
+    },
+    "8": {
+        "inputs": {
+            "samples": [
+                "3",
+                0
+            ],
+            "vae": [
+                "4",
+                2
+            ]
+        },
+        "class_type": "VAEDecode"
+    },
+    "9": {
+        "inputs": {
+            "filename_prefix": "Nexus_Video",
+            "images": [
+                "8",
+                0
+            ]
+        },
+        "class_type": "SaveImage"
+    },
+    "10": {
+        "inputs": {
+            "clip_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+            "type": "wan"
+        },
+        "class_type": "CLIPLoader"
+    }
+}

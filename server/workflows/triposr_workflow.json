@@ -1,0 +1,50 @@
+{
+  "3": {
+    "inputs": {
+      "ckpt_name": "triposr.ckpt"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load TripoSR"
+    }
+  },
+  "12": {
+    "inputs": {
+      "image": "example.png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Reference Image"
+    }
+  },
+  "13": {
+    "inputs": {
+      "checkpoint": [
+        "3",
+        0
+      ],
+      "image": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "TripoSR",
+    "_meta": {
+      "title": "TripoSR Generation"
+    }
+  },
+  "14": {
+    "inputs": {
+      "mesh": [
+        "13",
+        0
+      ],
+      "filename_prefix": "nexus_3d"
+    },
+    "class_type": "SaveMesh",
+    "_meta": {
+      "title": "Save 3D Mesh"
+    }
+  }
+}

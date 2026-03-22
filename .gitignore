@@ -1,0 +1,22 @@
+# Logs and Diagnostics
+logs/
+*.log
+diag_*.txt
+
+# Environments and Dependencies
+node_modules/
+dist/
+.env
+.env.*
+.venv/
+venv/
+stable-diffusion-webui/
+ComfyUI/
+stable-diffusion-webui/venv/
+ComfyUI/venv/
+python_installer.exe
+*.exe
+
+# OS Files
+.DS_Store
+Thumbs.db

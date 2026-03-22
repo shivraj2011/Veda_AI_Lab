@@ -1,0 +1,14 @@
+{
+  "name": "nexus-desktop",
+  "version": "1.0.0",
+  "description": "Nexus AI Lab Desktop",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Nexus",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^33.4.11"
+  }
+}

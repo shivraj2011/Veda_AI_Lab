@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+
+
+model Generation {
+  id              String   @id @default(uuid())
+  type            String   // image, video, audio, code
+  prompt          String
+  negative_prompt String?
+  model_id        String?  // The model used (e.g., "sd-xl", "gpt-4")
+  output_path     String   // Path to the file in /public/generations or URL
+  parameters      String?  // JSON string of generation params (cfg, steps, etc.)
+  is_favorite     Boolean  @default(false)
+  created_at      DateTime @default(now())
+}
+
+model Game {
+  id          String   @id @default(uuid())
+  title       String
+  genre       String?
+  description String?
+  code_path   String?  // Path to the generated game code/folder
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
+
+model Chat {
+  id          String   @id @default(uuid())
+  title       String
+  model_id    String?
+  messages    String   // JSON string of conversation history
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
+
+model Character {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  avatar_path String?
+  system_prompt String? // The "Persona" definition
+  created_at  DateTime @default(now())
+}

@@ -1,0 +1,72 @@
+/* Global Styles */
+body {
+    background-color: #0f172a;
+    /* Slate 900 - Lighter than black */
+    color: #f8fafc;
+    /* Slate 50 */
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+}
+
+/* Grid Background - Subtler */
+.bg-grid {
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    /* Removed heavy radial mask to prevent "black void" effect */
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+/* Animations */
+@keyframes glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+    }
+}
+
+.animate-glow {
+    animation: glow 3s infinite;
+}
+
+/* Replaced Glass Card with Solid Card */
+.glass-card {
+    background-color: #1e293b;
+    /* Slate 800 - Solid */
+    border: 1px solid #334155;
+    /* Slate 700 */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    backdrop-filter: none;
+    /* NO BLUR */
+    -webkit-backdrop-filter: none;
+}
+
+.glass-card:hover {
+    background-color: #334155;
+    /* Slate 700 */
+    border-color: #60a5fa;
+    /* Blue 400 */
+    transform: translateY(-2px);
+}
