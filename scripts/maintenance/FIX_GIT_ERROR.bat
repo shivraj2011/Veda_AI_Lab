@@ -1,6 +1,6 @@
-@echo off
+﻿@echo off
 echo ===========================================
-echo   NEXUS CORE: GIT CORRUPTION FIXER
+echo   Veda CORE: GIT CORRUPTION FIXER
 echo ===========================================
 echo.
 

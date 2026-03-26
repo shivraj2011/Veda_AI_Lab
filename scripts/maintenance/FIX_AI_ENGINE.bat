@@ -1,7 +1,7 @@
-@echo off
-title Nexus Core - Engine Repair
+﻿@echo off
+title Veda Core - Engine Repair
 echo ===============================================
-echo      NEXUS CORE: AI ENGINE REPAIR TOOL
+echo      Veda CORE: AI ENGINE REPAIR TOOL
 echo ===============================================
 echo.
 echo ERROR DIAGNOSIS: Python 3.13 detected.

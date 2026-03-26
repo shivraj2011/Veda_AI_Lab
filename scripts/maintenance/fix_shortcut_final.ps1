@@ -1,8 +1,8 @@
-# Fix Desktop Shortcut and Icon for Veda AI Lab
+﻿# Fix Desktop Shortcut and Icon for Veda AI Lab
 $root = Resolve-Path "$PSScriptRoot\..\.."
-$logoPath = "$root\nexus-lab-frontend\public\branding\veda_logo_final_v3.png"
-$icoPath = "$root\nexus-lab-frontend\public\favicon.ico"
-$targetScript = "$root\start_nexus.bat"
+$logoPath = "$root\veda-lab-frontend\public\branding\veda_logo_final_v3.png"
+$icoPath = "$root\veda-lab-frontend\public\favicon.ico"
+$targetScript = "$root\start_Veda.bat"
 $shortcutName = "Veda AI Lab.lnk"
 $desktop = [System.Environment]::GetFolderPath("Desktop")
 $shortcutPath = Join-Path $desktop $shortcutName
@@ -38,7 +38,7 @@ try {
     # Try to find the shortcut if the exact path doesn't exist
     if (-not (Test-Path $shortcutPath)) {
         Write-Host "Shortcut not found at $shortcutPath. Searching desktop..."
-        $found = Get-ChildItem -Path $desktop -Filter "*.lnk" | Where-Object { $_.Name -like "*Veda*" -or $_.Name -like "*Nexus*" } | Select-Object -First 1
+        $found = Get-ChildItem -Path $desktop -Filter "*.lnk" | Where-Object { $_.Name -like "*Veda*" -or $_.Name -like "*Veda*" } | Select-Object -First 1
         if ($found) {
             $shortcutPath = $found.FullName
             Write-Host "Found existing shortcut: $shortcutPath"

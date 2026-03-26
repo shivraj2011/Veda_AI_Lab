@@ -1,6 +1,6 @@
-$root = Resolve-Path "$PSScriptRoot\..\.."
-$logoPath = "$root\nexus-lab-frontend\public\branding\veda_logo_final_v3.png"
-$icoPath = "$root\nexus-lab-frontend\public\favicon.ico"
+﻿$root = Resolve-Path "$PSScriptRoot\..\.."
+$logoPath = "$root\veda-lab-frontend\public\branding\veda_logo_final_v3.png"
+$icoPath = "$root\veda-lab-frontend\public\favicon.ico"
 $desktop = [System.Environment]::GetFolderPath("Desktop")
 $shortcutPath = Join-Path $desktop "Veda AI Lab.lnk"
 

@@ -1,9 +1,9 @@
-@echo off
-title Nexus Connection Fixer
+﻿@echo off
+title Veda Connection Fixer
 color 0E
 
 echo ==================================================
-echo      NEXUS CONNECTION DIAGNOSTICS
+echo      Veda CONNECTION DIAGNOSTICS
 echo ==================================================
 echo.
 
@@ -15,7 +15,7 @@ echo.
 
 echo [2/2] Attempting to Open Firewall Port 3000...
 echo (You may need to run this script as Administrator if this fails)
-netsh advfirewall firewall add rule name="Nexus AI Lab" dir=in action=allow protocol=TCP localport=3000 profile=any
+netsh advfirewall firewall add rule name="Veda AI Lab" dir=in action=allow protocol=TCP localport=3000 profile=any
 if "%ERRORLEVEL%"=="0" (
     echo [SUCCESS] Port 3000 is now OPEN for mobile access.
 ) else (

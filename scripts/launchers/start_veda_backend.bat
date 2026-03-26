@@ -1,9 +1,9 @@
-@echo off
-title Nexus AI Backend Launcher
+﻿@echo off
+title Veda AI Backend Launcher
 color 0A
 
 echo ==================================================
-echo      NEXUS AI BACKEND LAUNCHER
+echo      Veda AI BACKEND LAUNCHER
 echo ==================================================
 echo.
 
@@ -31,7 +31,7 @@ echo.
 echo ==================================================
 echo      AI BACKEND READY!
 echo ==================================================
-echo You can now use Nexus Code Studio and Chat.
+echo You can now use Veda Code Studio and Chat.
 echo Minimized this window, but DO NOT CLOSE IT.
 echo.
 pause

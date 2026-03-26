@@ -1,6 +1,6 @@
-@echo off
+﻿@echo off
 setlocal enabledelayedexpansion
-title NEXUS BACKEND PRO - Unified Lab Environment
+title Veda BACKEND PRO - Unified Lab Environment
 color 0B
 
 :: Suppress GitHub login popups and interactive prompts
@@ -24,13 +24,13 @@ echo                   [ UNIFIED BACKEND STARTUP ]
 echo ======================================================================
 echo.
 
-:: 1. Initialize Nexus Server (Orchestrator)
-echo [1/5] BOOTING NEXUS ORCHESTRATOR...
+:: 1. Initialize Veda Server (Orchestrator)
+echo [1/5] BOOTING Veda ORCHESTRATOR...
 if exist "server\index.js" (
-    start "NEXUS SERVER" cmd /k "node server/index.js"
+    start "Veda SERVER" cmd /k "node server/index.js"
     echo    [^ ^] SERVER ONLINE
 ) else (
-    echo    [X] ERROR: Nexus Server files not found.
+    echo    [X] ERROR: Veda Server files not found.
 )
 timeout /t 2 >nul
 
@@ -79,7 +79,7 @@ timeout /t 2 >nul
 :: 5. Launch Interfaces
 echo.
 echo [5/5] LAUNCHING TERMINAL INTERFACES...
-echo    [^ ^] OPENING NEXUS HUB
+echo    [^ ^] OPENING Veda HUB
 start http://localhost:3000
 
 if "!SD_FOUND!"=="1" (
@@ -97,7 +97,7 @@ echo.
 echo ======================================================================
 echo                [ ALL SYSTEMS INITIATED ]
 echo ======================================================================
-echo  1. You can now use Nexus Lab with all AI modules connected.
+echo  1. You can now use Veda Lab with all AI modules connected.
 echo  2. Keep this window or the sub-windows open to maintain service.
 echo  3. Check individual windows if any service fails to respond.
 echo ======================================================================

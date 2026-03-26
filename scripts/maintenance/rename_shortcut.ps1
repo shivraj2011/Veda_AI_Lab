@@ -1,4 +1,4 @@
-$shortcutPath = "..\Nexus AI.lnk"
+﻿$shortcutPath = "..\Veda AI.lnk"
 if (Test-Path $shortcutPath) {
     $shell = New-Object -ComObject WScript.Shell
     $oldShortcut = $shell.CreateShortcut((Resolve-Path $shortcutPath).Path)
@@ -8,7 +8,7 @@ if (Test-Path $shortcutPath) {
     $newShortcut = $shell.CreateShortcut("..\Veda AI Lab.lnk")
     $newShortcut.TargetPath = $target
     $newShortcut.Arguments = $args
-    $newShortcut.IconLocation = "C:\Users\Shashwat Shiv Raj\OneDrive\Desktop\Nexus Lab 1st startup\nexus-lab-frontend\public\favicon.ico"
+    $newShortcut.IconLocation = "C:\Users\Shashwat Shiv Raj\OneDrive\Desktop\Veda Lab 1st startup\veda-lab-frontend\public\favicon.ico"
     $newShortcut.Save()
     Write-Host "Shortcut Replaced and Named Veda AI Lab"
 } else {

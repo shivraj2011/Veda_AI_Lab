@@ -1,9 +1,9 @@
-# Force Install ALL Dependencies via ZIP (Bypass Git Entirely)
+﻿# Force Install ALL Dependencies via ZIP (Bypass Git Entirely)
 $ErrorActionPreference = "Stop"
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 Write-Host "==========================================" -ForegroundColor Cyan
-Write-Host "   NEXUS CORE: FULL OFFLINE INSTALLER" -ForegroundColor Cyan
+Write-Host "   Veda CORE: FULL OFFLINE INSTALLER" -ForegroundColor Cyan
 Write-Host "==========================================" -ForegroundColor Cyan
 Write-Host "Pre-loading all AI brains to skip login screens..." -ForegroundColor Yellow
 

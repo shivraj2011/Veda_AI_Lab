@@ -1,5 +1,5 @@
-@echo off
-title Nexus Cleanup & Deploy
+﻿@echo off
+title Veda Cleanup & Deploy
 color 0B
 
 :: 1. Detect Desktop Path (Robust)
@@ -7,8 +7,8 @@ set "SRC=%~dp0"
 set "PS_CMD=[Environment]::GetFolderPath('Desktop')"
 for /f "usebackq delims=" %%I in (`powershell -Command "%PS_CMD%"`) do set "USER_DESKTOP=%%I"
 
-set "TARGET=%USER_DESKTOP%\Nexus Lab 1st startup"
-set "BACKUP=%USER_DESKTOP%\Nexus_Backup_%RANDOM%"
+set "TARGET=%USER_DESKTOP%\Veda Lab 1st startup"
+set "BACKUP=%USER_DESKTOP%\Veda_Backup_%RANDOM%"
 
 echo [1/5] Target: "%TARGET%"
 echo [2/5] Cleaning old workspace...
@@ -20,14 +20,14 @@ mkdir "%TARGET%"
 
 echo [3/5] Deploying Fresh Files...
 :: Copy Launchers
-copy "%SRC%Nexus App.bat" "%TARGET%\" >nul
-copy "%SRC%start_nexus.bat" "%TARGET%\" >nul
+copy "%SRC%Veda App.bat" "%TARGET%\" >nul
+copy "%SRC%start_Veda.bat" "%TARGET%\" >nul
 copy "%SRC%install_desktop_shortcut.bat" "%TARGET%\" >nul
 
 :: Copy Source File
 copy "%SRC%index.html" "%TARGET%\" >nul
 copy "%SRC%manifest.json" "%TARGET%\" >nul
-copy "%SRC%nexus_logo.ico" "%TARGET%\" >nul
+copy "%SRC%Veda_logo.ico" "%TARGET%\" >nul
 copy "%SRC%.env" "%TARGET%\" >nul 2>nul
 
 echo [4/5] Copying System Folders (Engine Room)...
@@ -52,12 +52,12 @@ echo [5/5] Final Polish (Hiding System Files)...
 :: Hide everything
 attrib +h "%TARGET%\*" /S /D
 :: Unhide Launchers
-attrib -h "%TARGET%\start_nexus.bat"
-attrib -h "%TARGET%\Nexus App.bat"
-attrib -h "%TARGET%\Nexus Lab 1st startup"
+attrib -h "%TARGET%\start_Veda.bat"
+attrib -h "%TARGET%\Veda App.bat"
+attrib -h "%TARGET%\Veda Lab 1st startup"
 
 echo.
 echo [SUCCESS] Deployment Complete!
-echo The folder 'Nexus Lab 1st startup' now contains ONLY your App.
+echo The folder 'Veda Lab 1st startup' now contains ONLY your App.
 echo (Old files are in %BACKUP% just in case).
 pause

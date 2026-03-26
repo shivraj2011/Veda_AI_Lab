@@ -1,5 +1,5 @@
-@echo off
-title NEXUS CORE: Stable Diffusion Repair Tool
+﻿@echo off
+title Veda CORE: Stable Diffusion Repair Tool
 color 0E
 
 echo ==================================================
@@ -48,7 +48,7 @@ echo.
 echo ==================================================
 echo      REPAIR STEPS COMPLETE
 echo ==================================================
-echo 1. Now run "NEXUS_BACKEND_PRO.bat" again.
+echo 1. Now run "Veda_BACKEND_PRO.bat" again.
 echo 2. It will download the missing assets (around 500MB).
 echo 3. Ensure your internet is stable.
 echo.

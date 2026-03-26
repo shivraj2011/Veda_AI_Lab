@@ -1,5 +1,5 @@
-@echo off
-title NEXUS CORE: STABLE DIFFUSION SUPER REPAIR V2 🚀
+﻿@echo off
+title Veda CORE: STABLE DIFFUSION SUPER REPAIR V2 ðŸš€
 color 0B
 
 echo ==================================================
@@ -84,7 +84,7 @@ echo.
 echo ==================================================
 echo      SUPER REPAIR V2 COMPLETE
 echo ==================================================
-echo 1. Now run "NEXUS_BACKEND_PRO.bat".
+echo 1. Now run "Veda_BACKEND_PRO.bat".
 echo 2. It will re-create the environment (takes 5-10 mins).
 echo 3. This is the definitive fix for your "fetch" errors.
 echo.

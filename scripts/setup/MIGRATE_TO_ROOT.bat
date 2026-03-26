@@ -1,14 +1,14 @@
-@echo off
-title Nexus Migration Assistant
+﻿@echo off
+title Veda Migration Assistant
 color 0E
 
 echo ==================================================
-echo      MIGRATING SYSTEM TO ROOT (C:\Nexus_Lab)
+echo      MIGRATING SYSTEM TO ROOT (C:\Veda_Lab)
 echo ==================================================
 echo.
 echo [1/4] Creating Clean Workspace...
 set "SOURCE=%~dp0"
-set "DEST=C:\Nexus_Lab"
+set "DEST=C:\Veda_Lab"
 
 if not exist "%DEST%" mkdir "%DEST%"
 
@@ -22,11 +22,11 @@ echo [2.5] Copying Critical Modules...
 robocopy "%SOURCE%stable-diffusion-webui" "%DEST%\stable-diffusion-webui" /E /ZB /COPY:DAT /R:3 /W:1 >nul
 
 echo [3/4] Registering New Location...
-:: Update the Shortcut to point to C:\Nexus_Lab
-set "TARGET_SCRIPT=%DEST%\NEXUS_INTERFACE.bat"
-set "ICON_PATH=%DEST%\nexus_logo.ico"
+:: Update the Shortcut to point to C:\Veda_Lab
+set "TARGET_SCRIPT=%DEST%\Veda_INTERFACE.bat"
+set "ICON_PATH=%DEST%\Veda_logo.ico"
 
-set "PS_CMD=$desktop = [Environment]::GetFolderPath('Desktop'); $s = (New-Object -COM WScript.Shell).CreateShortcut(\"$desktop\Nexus AI.lnk\"); $s.TargetPath = '%TARGET_SCRIPT%'; $s.IconLocation = '%ICON_PATH%,0'; $s.Description = 'Launch Nexus AI Lab'; $s.WorkingDirectory = '%DEST%'; $s.Save()"
+set "PS_CMD=$desktop = [Environment]::GetFolderPath('Desktop'); $s = (New-Object -COM WScript.Shell).CreateShortcut(\"$desktop\Veda AI.lnk\"); $s.TargetPath = '%TARGET_SCRIPT%'; $s.IconLocation = '%ICON_PATH%,0'; $s.Description = 'Launch Veda AI Lab'; $s.WorkingDirectory = '%DEST%'; $s.Save()"
 
 powershell -Command "%PS_CMD%"
 
@@ -39,7 +39,7 @@ echo ==================================================
 echo      MIGRATION COMPLETE
 echo ==================================================
 echo.
-echo 1. I have moved Nexus to: C:\Nexus_Lab
+echo 1. I have moved Veda to: C:\Veda_Lab
 echo    (This fixes the OneDrive Red X errors).
 echo.
 echo 2. I have repaired the Git files.
@@ -48,6 +48,6 @@ echo.
 echo 3. I have updated your Desktop Icon.
 echo.
 echo YOU CAN NOW DELETE THE OLD FOLDER ON YOUR DESKTOP using Shift+Delete.
-echo Use the "Nexus AI" shortcut to start.
+echo Use the "Veda AI" shortcut to start.
 echo.
 pause

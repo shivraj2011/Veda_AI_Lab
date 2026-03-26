@@ -1,6 +1,6 @@
-@echo off
+﻿@echo off
 echo ===========================================
-echo   NEXUS CORE: MANUAL REPOSITORY INSTALLER
+echo   Veda CORE: MANUAL REPOSITORY INSTALLER
 echo ===========================================
 echo.
 echo The automatic downloader is having trouble.

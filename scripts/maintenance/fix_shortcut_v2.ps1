@@ -1,8 +1,8 @@
-# Forceful Veda Shortcut Fixer v2
+﻿# Forceful Veda Shortcut Fixer v2
 $root = Resolve-Path "$PSScriptRoot\..\.."
-$logoPath = "$root\nexus-lab-frontend\public\branding\veda_logo_v7.png"
-$icoPath = "$root\nexus-lab-frontend\public\favicon.ico"
-$targetScript = "$root\start_nexus.bat"
+$logoPath = "$root\veda-lab-frontend\public\branding\veda_logo_v7.png"
+$icoPath = "$root\veda-lab-frontend\public\favicon.ico"
+$targetScript = "$root\start_Veda.bat"
 $desktop = [System.Environment]::GetFolderPath("Desktop")
 
 Add-Type -AssemblyName System.Drawing
@@ -31,7 +31,7 @@ try {
 }
 
 # 2. Update EVERY possible shortcut
-$shortcutNames = @("Veda AI Lab.lnk", "Nexus AI.lnk", "Veda.lnk")
+$shortcutNames = @("Veda AI Lab.lnk", "Veda AI.lnk", "Veda.lnk")
 $shell = New-Object -ComObject WScript.Shell
 
 foreach ($name in $shortcutNames) {

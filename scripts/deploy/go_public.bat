@@ -1,16 +1,16 @@
-@echo off
-title Nexus Public Link Generator
+﻿@echo off
+title Veda Public Link Generator
 color 0D
 
 echo ==================================================
-echo      NEXUS PUBLIC TUNNEL (No Wi-Fi Needed)
+echo      Veda PUBLIC TUNNEL (No Wi-Fi Needed)
 echo ==================================================
 echo.
 echo This script will generate a PUBLIC URL for your app.
 echo You can send this URL to ANYONE or ANY DEVICE.
 echo.
 echo [!] Requirements:
-echo     1. 'start_nexus.bat' MUST be running in the background.
+echo     1. 'start_Veda.bat' MUST be running in the background.
 echo.
 echo [!] How to use:
 echo     1. Wait for a URL to appear below (like https://xxxx.localhost.run)

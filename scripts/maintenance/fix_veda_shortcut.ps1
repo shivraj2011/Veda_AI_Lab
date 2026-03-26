@@ -1,8 +1,8 @@
-$desktop = [System.Environment]::GetFolderPath("Desktop")
+﻿$desktop = [System.Environment]::GetFolderPath("Desktop")
 $shortcutName = "Veda AI Lab.lnk"
-$oldName = "Nexus AI.lnk"
+$oldName = "Veda AI.lnk"
 $root = Resolve-Path "$PSScriptRoot\..\.."
-$iconPath = "$root\nexus-lab-frontend\public\branding\veda_logo_final_v3.png"
+$iconPath = "$root\veda-lab-frontend\public\branding\veda_logo_final_v3.png"
 
 $shell = New-Object -ComObject WScript.Shell
 
@@ -25,7 +25,7 @@ if (Test-Path "$desktop\$oldName") {
     Write-Host "Updated existing Veda shortcut icon"
 } else {
     Write-Host "Searching for shortcut in Drive..."
-    $scPath = Get-ChildItem -Path $desktop -Filter "*.lnk" | Where-Object { $_.Name -match "Veda|Nexus" } | Select-Object -ExpandProperty FullName -First 1
+    $scPath = Get-ChildItem -Path $desktop -Filter "*.lnk" | Where-Object { $_.Name -match "Veda|Veda" } | Select-Object -ExpandProperty FullName -First 1
     if ($scPath) {
         $sc = $shell.CreateShortcut($scPath)
         $sc.IconLocation = "$iconPath,0"
