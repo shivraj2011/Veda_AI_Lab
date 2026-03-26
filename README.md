@@ -11,7 +11,7 @@ To launch the full laboratory, use the primary entry points in the root director
 
 ## 📂 Project Structure
 
-- `nexus-lab-frontend/`: The primary React-based user interface.
+- `veda-lab-frontend/`: The primary React-based user interface.
 - `server/`: Backend logic, database management, and API endpoints.
 - `scripts/`:
   - `launchers/`: Auxiliary startup and setup scripts.

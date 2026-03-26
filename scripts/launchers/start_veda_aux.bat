@@ -1,4 +1,4 @@
-﻿@echo off
+@echo off
 title Veda veda AI Lab - LAUNCHER
 color 0B
 
