@@ -19,6 +19,8 @@
     "zustand": "^5.0.1"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.14.0",
     "@next/eslint-plugin-next": "16.2.1",
     "@types/node": "^20.17.6",
     "@types/react": "^19.0.0",
