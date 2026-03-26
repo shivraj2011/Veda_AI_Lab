@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import { Geist } from 'next/font/google';
 import './globals.css';
 
@@ -6,7 +6,7 @@ const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
   title: 'Veda AI Lab: Universal Synthesis',
-  description: 'Unrestricted Multi-Modal Neural Engineering Laboratory',
+  description: 'veda Multi-Modal Neural Engineering Laboratory',
   icons: {
     icon: [
       { url: '/favicon.ico?v=3', sizes: 'any' },

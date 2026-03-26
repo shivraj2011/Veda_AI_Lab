@@ -1,9 +1,9 @@
 @echo off
-title Nexus Core: All Systems Initialization
+title Veda Core: All Systems Initialization
 color 0A
 
 echo ==================================================
-echo      NEXUS CORE: STARTING ALL BACKENDS
+echo      VEDA CORE: STARTING ALL BACKENDS
 echo ==================================================
 echo.
 
@@ -15,7 +15,7 @@ if "%ERRORLEVEL%"=="0" (
 ) else (
     echo    - Booting Cortex...
     start "Cortex (Ollama)" /min ollama serve
-    timeout /t 3 >nul
+    timeout /t /nobreak 3 >nul
 )
 
 :: 2. Start Stable Diffusion (Images) - Automatic1111
@@ -38,16 +38,16 @@ if exist "ComfyUI\run_nvidia_gpu.bat" (
 )
 
 :: 4. Start Node.js Server (Orchestrator)
-echo [4/4] Starting Nexus Orchestrator (Server)...
+echo [4/4] Starting Veda Orchestrator (Server)...
 echo    - Establishing Neural Link...
-start "Nexus Orchestrator" cmd /k "cd /d %~dp0 && node server/index.js"
-timeout /t 2 >nul
+start "Veda Orchestrator" cmd /k "cd /d %~dp0 && node server/index.js"
+timeout /t /nobreak 2 >nul
 
 echo.
 echo ==================================================
 echo      ALL SYSTEMS ONLINE
 echo ==================================================
 echo The Core is running. You may minimize this window.
-echo Now launch "NEXUS_INTERFACE.bat" to open the app.
+echo Now launch "Veda AI Lab.bat" to open the app.
 echo.
 pause

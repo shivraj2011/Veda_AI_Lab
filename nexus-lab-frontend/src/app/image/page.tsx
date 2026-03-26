@@ -10,11 +10,11 @@ import { ImageCanvas } from '@/components/ui/animated/ImageCanvas';
 import { Wand2, Zap, Sparkles, Users } from 'lucide-react';
 
 const IMAGE_MODELS = [
-    { id: 'nexus-comic', name: 'SDXL (Animagine V3.1)', desc: 'High-fidelity cinematic and illustrative synthesis.', icon: Sparkles, color: 'blue', preview: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400&auto=format&fit=crop', tags: ['Anime', 'XL'] },
-    { id: 'nexus-flux', name: 'Flux.1 Schnell', desc: 'State-of-the-art realism and prompt adherence.', icon: Wand2, color: 'amber', preview: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=400&auto=format&fit=crop', tags: ['SOTA', 'Realism'] },
-    { id: 'nexus-pony', name: 'Pony Diffusion V6', desc: 'The gold standard for character realism and aesthetics.', icon: Users, color: 'purple', preview: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop', tags: ['Pony', 'Hyper-Real'] },
-    { id: 'nexus-illustrious', name: 'Illustrious XL', desc: 'Next-gen anime and stylized artistic generations.', icon: Sparkles, color: 'emerald', preview: 'https://images.unsplash.com/photo-1578632738981-4fe6506d393b?q=80&w=400&auto=format&fit=crop', tags: ['Illustrious', 'Art'] },
-    { id: 'nexus-v15', name: 'Stable Diffusion v1.5', desc: 'Fast, lightweight classic image generation.', icon: Zap, color: 'gray', preview: 'https://images.unsplash.com/photo-1614728263952-84ea206f9c45?q=80&w=400&auto=format&fit=crop', tags: ['Legacy', 'Fast'] },
+    { id: 'Veda-comic', name: 'SDXL (Animagine V3.1)', desc: 'High-fidelity cinematic and illustrative synthesis.', icon: Sparkles, color: 'blue', preview: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400&auto=format&fit=crop', tags: ['Anime', 'XL'] },
+    { id: 'Veda-flux', name: 'Flux.1 Schnell', desc: 'State-of-the-art realism and prompt adherence.', icon: Wand2, color: 'amber', preview: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=400&auto=format&fit=crop', tags: ['SOTA', 'Realism'] },
+    { id: 'Veda-pony', name: 'Pony Diffusion V6', desc: 'The gold standard for character realism and aesthetics.', icon: Users, color: 'purple', preview: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop', tags: ['Pony', 'Hyper-Real'] },
+    { id: 'Veda-illustrious', name: 'Illustrious XL', desc: 'Next-gen anime and stylized artistic generations.', icon: Sparkles, color: 'emerald', preview: 'https://images.unsplash.com/photo-1578632738981-4fe6506d393b?q=80&w=400&auto=format&fit=crop', tags: ['Illustrious', 'Art'] },
+    { id: 'Veda-v15', name: 'Stable Diffusion v1.5', desc: 'Fast, lightweight classic image generation.', icon: Zap, color: 'gray', preview: 'https://images.unsplash.com/photo-1614728263952-84ea206f9c45?q=80&w=400&auto=format&fit=crop', tags: ['Legacy', 'Fast'] },
 ];
 
 export default function ImageStudio() {

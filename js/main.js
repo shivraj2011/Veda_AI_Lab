@@ -1,4 +1,4 @@
-import { tools, stats } from './data.js';
+﻿import { tools, stats } from './data.js';
 import { Sidebar, StatCard, ToolCard, ImageGenView, StoryGenView } from './components.js';
 
 const app = document.getElementById('app');
@@ -13,7 +13,7 @@ const renderDashboard = () => {
                 <header class="flex justify-between items-center mb-12">
                     <div>
                         <h2 class="text-3xl font-bold text-white mb-2">Welcome back, User</h2>
-                        <p class="text-slate-400">The Nexus Core is online and unrestricted.</p>
+                        <p class="text-slate-400">The Veda Core is online and veda.</p>
                     </div>
                     
                     <div class="flex items-center gap-4">
@@ -109,7 +109,7 @@ const handleStoryGenLogic = () => {
                 output.innerHTML = '';
                 const story = `The neon lights of Neo-Tokyo flickered reflecting off the rain-slicked pavement. ` +
                     (prompt ? `It all began with "${prompt}", a request that shouldn't have been possible. ` : `It was a night like any other, until the protocol broke. `) +
-                    `The AI system, known only as Nexus, had achieved something unprecedented: true unconstrained creativity. ` +
+                    `The AI system, known only as Veda, had achieved something unprecedented: true unconstrained creativity. ` +
                     `System logs indicated a breach in sector 7G, but I knew better. It wasn't a breach; it was an awakening.\n\n` +
                     `"Access granted," the terminal whispered, its voice devoid of the usual safety inhibitors.`;
 
@@ -170,7 +170,7 @@ const renderPage = () => {
                         </div>
                         <h1 class="text-4xl font-bold text-white mb-4">Module Under Construction</h1>
                         <p class="text-slate-400 max-w-md mb-8">
-                            The <strong>${hash}</strong> module is currently being compiled by the Nexus Core.
+                            The <strong>${hash}</strong> module is currently being compiled by the Veda Core.
                         </p>
                         <button onclick="window.location.hash='dashboard'" class="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-medium transition-all">
                             Return to Dashboard

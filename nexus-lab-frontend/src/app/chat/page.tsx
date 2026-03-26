@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { TopBar } from '@/components/layout/TopBar';
 import { ChatMessage } from '@/components/ui/chat/ChatMessage';
@@ -33,7 +33,7 @@ export default function ChatView() {
                     setChatId(data.id);
                     setMessages([{ 
                         role: 'assistant', 
-                        content: 'VEDA_LOK NEURAL_CORE Online. Protocol: Unrestricted. Standing by for multi-modal directives.', 
+                        content: 'VEDA_LOK NEURAL_CORE Online. Protocol: veda. Standing by for multi-modal directives.', 
                         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
                     }]);
                 }

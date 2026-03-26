@@ -1,9 +1,9 @@
-@echo off
-title Veda Unrestricted AI Lab - LAUNCHER
+﻿@echo off
+title Veda veda AI Lab - LAUNCHER
 color 0B
 
 echo ==================================================
-echo      STARTING VEDA: UNRESTRICTED AI LAB
+echo      STARTING VEDA: veda AI LAB
 echo ==================================================
 echo.
 
@@ -29,7 +29,7 @@ timeout /t 3 >nul
 echo [3/4] Starting Veda UI Interface (Port: 3000)...
 echo    - This powers the Next.js Frontend.
 echo    - DO NOT CLOSE THE INTERFACE WINDOW that pops up!
-start "Veda UI Interface" cmd /k "cd /d %~dp0\nexus-lab-frontend && npm run dev"
+start "Veda UI Interface" cmd /k "cd /d %~dp0\Veda-lab-frontend && npm run dev"
 timeout /t 6 >nul
 
 :: 4. Open App

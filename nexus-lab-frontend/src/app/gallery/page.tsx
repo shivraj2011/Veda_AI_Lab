@@ -122,7 +122,7 @@ export default function GalleryPage() {
                                                     <h3 className="text-xl font-black text-white tracking-tight">{item.title}</h3>
                                                     <div className="flex items-center gap-2 pt-2 transition-transform transform translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 duration-500">
                                                         <Zap className="w-3 h-3 text-blue-400" />
-                                                        <span className="text-[10px] font-bold text-gray-300 uppercase tracking-widest">NEXUS-FORGE XL</span>
+                                                        <span className="text-[10px] font-bold text-gray-300 uppercase tracking-widest">Veda-FORGE XL</span>
                                                     </div>
                                                 </div>
                                             </motion.div>

@@ -1,9 +1,9 @@
 @echo off
-title Nexus Application
+title Veda AI Lab
 color 0B
 
 echo ==================================================
-echo      LAUNCHING NEXUS APP (Native Mode)
+echo      LAUNCHING VEDA AI LAB (Native Mode)
 echo ==================================================
 echo.
 

@@ -28,7 +28,7 @@ export default function CharacterForge() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     prompt: `portrait of ${prompt}, high quality, character sheet`,
-                    model_id: activeModelId === 'animagine-v31' ? 'nexus-comic' : 'nexus-flux'
+                    model_id: activeModelId === 'animagine-v31' ? 'Veda-comic' : 'Veda-flux'
                 })
             });
             const data = await res.json();

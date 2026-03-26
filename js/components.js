@@ -1,4 +1,4 @@
-// Reusable UI Elements
+﻿// Reusable UI Elements
 const InputGroup = (label, id, type = 'text', placeholder = '', value = '') => `
     <div class="space-y-2">
         <label for="${id}" class="text-xs font-semibold text-slate-400 uppercase tracking-wider">${label}</label>
@@ -35,7 +35,7 @@ export const ImageGenView = () => `
                 <div class="p-2 bg-blue-500/20 rounded-lg">
                     <i data-lucide="image" class="w-6 h-6 text-blue-400"></i>
                 </div>
-                <h2 class="text-3xl font-bold text-white">Unrestricted Image Generator</h2>
+                <h2 class="text-3xl font-bold text-white">veda Image Generator</h2>
             </div>
             <p class="text-slate-400 max-w-2xl">Generate specific, high-quality visuals using advanced local models. No safety filters applied.</p>
         </header>
@@ -108,7 +108,7 @@ export const StoryGenView = () => `
                 <div class="p-2 bg-indigo-500/20 rounded-lg">
                     <i data-lucide="book-open" class="w-6 h-6 text-indigo-400"></i>
                 </div>
-                <h2 class="text-3xl font-bold text-white">Unrestricted Story Writer</h2>
+                <h2 class="text-3xl font-bold text-white">veda Story Writer</h2>
             </div>
             <p class="text-slate-400">Co-write stories with uncensored large language models.</p>
         </header>
@@ -154,8 +154,8 @@ export const Sidebar = (activePage = 'dashboard') => {
         <aside class="w-64 bg-slate-900 border-r border-slate-700 flex flex-col h-screen fixed left-0 top-0 z-50 shadow-xl">
             <div class="p-6">
                 <div class="flex items-center gap-3">
-                    <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68bb17e0b4613104f7aecdc5/c2c9bcc60_logo.png" class="w-8 h-8 rounded-full shadow-lg shadow-blue-500/50" alt="Logo">
-                    <h1 class="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-500">NEXUS CORE</h1>
+                    <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/veda-prod/public/68bb17e0b4613104f7aecdc5/c2c9bcc60_logo.png" class="w-8 h-8 rounded-full shadow-lg shadow-blue-500/50" alt="Logo">
+                    <h1 class="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-500">Veda CORE</h1>
                 </div>
             </div>
             
@@ -174,7 +174,7 @@ export const Sidebar = (activePage = 'dashboard') => {
                 <div class="p-4 rounded-xl bg-slate-800 border border-slate-600">
                     <div class="flex items-center gap-2 mb-2">
                         <i data-lucide="crown" class="w-4 h-4 text-yellow-500"></i>
-                        <span class="text-xs font-bold text-yellow-500 tracking-wider">UNRESTRICTED</span>
+                        <span class="text-xs font-bold text-yellow-500 tracking-wider">veda</span>
                     </div>
                     <p class="text-xs text-slate-300">System running at 100% capacity. No limits applied.</p>
                 </div>

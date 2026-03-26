@@ -1,12 +1,12 @@
-export const tools = [
+﻿export const tools = [
     {
         id: 'image-gen',
         title: 'Image Generator',
-        description: 'Generate stunning visuals with our unrestricted AI engine.',
+        description: 'Generate stunning visuals with our veda AI engine.',
         icon: 'image',
         color: 'text-blue-400',
         bg: 'bg-blue-500/10',
-        status: 'Unrestricted'
+        status: 'veda'
     },
     {
         id: 'story-gen',
@@ -15,7 +15,7 @@ export const tools = [
         icon: 'book-open',
         color: 'text-indigo-400',
         bg: 'bg-indigo-500/10',
-        status: 'Unrestricted'
+        status: 'veda'
     },
     {
         id: 'character-builder',
@@ -24,7 +24,7 @@ export const tools = [
         icon: 'users',
         color: 'text-green-400',
         bg: 'bg-green-500/10',
-        status: 'Unrestricted'
+        status: 'veda'
     },
     {
         id: 'video-gen',
@@ -33,7 +33,7 @@ export const tools = [
         icon: 'video',
         color: 'text-red-400',
         bg: 'bg-red-500/10',
-        status: 'Unrestricted'
+        status: 'veda'
     },
     {
         id: 'prompt-enhancer',
@@ -42,21 +42,21 @@ export const tools = [
         icon: 'wand-2',
         color: 'text-yellow-400',
         bg: 'bg-yellow-500/10',
-        status: 'Unrestricted'
+        status: 'veda'
     },
     {
         id: 'assistant',
         title: 'AI Assistant',
-        description: 'Your personal unrestricted creative copilot.',
+        description: 'Your personal veda creative copilot.',
         icon: 'bot',
         color: 'text-purple-400',
         bg: 'bg-purple-500/10',
-        status: 'Unrestricted'
+        status: 'veda'
     }
 ];
 
 export const stats = [
     { label: 'Total Generations', value: '1,284', icon: 'zap' },
     { label: 'Total Characters', value: '843,921', icon: 'type' },
-    { label: 'Credits', value: '∞', icon: 'infinity' }
+    { label: 'Credits', value: 'âˆž', icon: 'infinity' }
 ];

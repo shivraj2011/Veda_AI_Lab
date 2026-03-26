@@ -126,7 +126,7 @@ export default function ProfilePage() {
                             </div>
                             <div>
                                 <h2 className="text-xl font-bold">Assistant Personalization</h2>
-                                <p className="text-sm text-gray-400">Define how the Nexus AI interacts with you.</p>
+                                <p className="text-sm text-gray-400">Define how the Veda AI interacts with you.</p>
                             </div>
                         </div>
 

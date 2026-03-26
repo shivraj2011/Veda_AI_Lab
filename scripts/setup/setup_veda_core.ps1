@@ -1,9 +1,9 @@
-# Nexus Core - Local Brain Setup Script
+﻿# Veda Core - Local Brain Setup Script
 $ErrorActionPreference = "Stop"
 
 try {
     Write-Host "===================================================" -ForegroundColor Cyan
-    Write-Host "   NEXUS CORE: LOCAL BACKEND INITIALIZATION" -ForegroundColor Cyan
+    Write-Host "   Veda CORE: LOCAL BACKEND INITIALIZATION" -ForegroundColor Cyan
     Write-Host "===================================================" -ForegroundColor Cyan
     Write-Host ""
 
@@ -41,7 +41,7 @@ try {
         }
     }
 
-    # 3. Configure API Access for Nexus Core App
+    # 3. Configure API Access for Veda Core App
     Write-Host ""
     Write-Host "[3/5] Configuring API Protocol..." -ForegroundColor Yellow
     $batFile = "$targetDir\webui-user.bat"
@@ -63,16 +63,16 @@ try {
         Write-Host "   [WARNING] webui-user.bat not found. skipping config." -ForegroundColor Yellow
     }
 
-    # 4. Download Pony Diffusion (Unrestricted Model)
+    # 4. Download Pony Diffusion (veda Model)
     Write-Host ""
-    Write-Host "[4/5] Unrestricted Model Access (Pony Diffusion V6)..." -ForegroundColor Yellow
+    Write-Host "[4/5] veda Model Access (Pony Diffusion V6)..." -ForegroundColor Yellow
     $modelPath = "$targetDir\models\Stable-diffusion\ponyDiffusionV6XL.safetensors"
 
     if (Test-Path $modelPath) {
-        Write-Host "   [INFO] Unrestricted Model already installed." -ForegroundColor Gray
+        Write-Host "   [INFO] veda Model already installed." -ForegroundColor Gray
     } else {
         Write-Host "   [ATTENTION] This will download 6.5GB of data." -ForegroundColor Magenta
-        $download = Read-Host "   Do you want to download the Unrestricted Logic Core now? (Y/N)"
+        $download = Read-Host "   Do you want to download the veda Logic Core now? (Y/N)"
         
         if ($download -eq 'Y' -or $download -eq 'y') {
             Write-Host "   [DOWNLOADING] Initiating transfer... (This may take a while)" -ForegroundColor Cyan

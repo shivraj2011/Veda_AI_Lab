@@ -8,7 +8,7 @@ export function EntryOverlay() {
     const [text, setText] = useState('');
 
     const loadingTexts = [
-        "INITIALIZING_NEXUS_CORE...",
+        "INITIALIZING_Veda_CORE...",
         "ESTABLISHING_SECURE_LINK...",
         "LOADING_AI_MODELS...",
         "SYSTEM_READY"

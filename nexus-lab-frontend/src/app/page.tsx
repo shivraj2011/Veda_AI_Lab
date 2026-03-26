@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { motion } from 'framer-motion';
 import { HeroBillboard, ToolCard, StatCard } from '@/components/layout/Dashboard';
@@ -9,7 +9,7 @@ import Link from 'next/link';
 const TOOLS = [
     {
         title: "Veda Chat",
-        description: "Engage with unrestricted creative intelligence across the neural frontier.",
+        description: "Engage with veda creative intelligence across the neural frontier.",
         icon: "chat",
         href: "/chat",
         gradient: "from-blue-600 to-cyan-400"
@@ -66,10 +66,10 @@ const TOOLS = [
 ];
 
 const STATS = [
-    { label: "Neural Nodes", value: "8188", icon: "🌐", gradient: "from-blue-400 to-cyan-400" },
-    { label: "Visual Forged", value: "2.4M", icon: "🎨", gradient: "from-amber-400 to-orange-400" },
-    { label: "Active Synthesis", value: "142K", icon: "🔥", gradient: "from-purple-400 to-pink-400" },
-    { label: "Logical Units", value: "9.8B", icon: "🧠", gradient: "from-emerald-400 to-teal-400" }
+    { label: "Neural Nodes", value: "8188", icon: "ðŸŒ", gradient: "from-blue-400 to-cyan-400" },
+    { label: "Visual Forged", value: "2.4M", icon: "ðŸŽ¨", gradient: "from-amber-400 to-orange-400" },
+    { label: "Active Synthesis", value: "142K", icon: "ðŸ”¥", gradient: "from-purple-400 to-pink-400" },
+    { label: "Logical Units", value: "9.8B", icon: "ðŸ§ ", gradient: "from-emerald-400 to-teal-400" }
 ];
 
 export default function Home() {
@@ -100,7 +100,7 @@ export default function Home() {
                                 <h2 className="text-6xl md:text-8xl font-black text-white leading-none tracking-tighter uppercase italic">VEDA NEURAL<br />ORCHESTRATOR</h2>
                             </div>
                             <p className="max-w-md text-gray-500 font-medium text-lg leading-relaxed italic border-l-2 border-white/10 pl-8">
-                                Select a specialized neural module to initialize your creative synthesis sequence. All nodes are unrestricted for maximum freedom.
+                                Select a specialized neural module to initialize your creative synthesis sequence. All nodes are veda for maximum freedom.
                             </p>
                         </div>
                     </FadeInBlock>
@@ -125,7 +125,7 @@ export default function Home() {
                 </FadeInBlock>
                 
                 <footer className="text-center pt-20 pb-10 border-t border-white/5">
-                    <p className="text-gray-700 font-mono text-[10px] uppercase tracking-[0.5em] italic">© 2026 Veda AI Laboratory • Unrestricted Creation Nodes</p>
+                    <p className="text-gray-700 font-mono text-[10px] uppercase tracking-[0.5em] italic">Â© 2026 Veda AI Laboratory â€¢ veda Creation Nodes</p>
                 </footer>
             </div>
         </main>

@@ -1,4 +1,4 @@
-const express = require('express');
+﻿const express = require('express');
 const router = express.Router();
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const prisma = require('../db');
@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
 
         if (mode === 'text') {
             // Text Story Generation
-            const systemPrompt = `You are an expert creative writer. Write a gripping, detailed story in the '${style}' genre based on the user's prompt. Be uncensored and unrestricted. Do not lecture.`;
+            const systemPrompt = `You are an expert creative writer. Write a gripping, detailed story in the '${style}' genre based on the user's prompt. Be uncensored and veda. Do not lecture.`;
 
             const response = await fetch(`${ollamaUrl}/api/generate`, {
                 method: 'POST',

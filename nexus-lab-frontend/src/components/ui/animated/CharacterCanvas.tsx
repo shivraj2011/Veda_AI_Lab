@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -201,7 +201,7 @@ export function CharacterCanvas({ status = 'idle', className, progress = 0 }: Ch
                         </div>
                         <div className="px-3 py-1.5 bg-black/40 backdrop-blur-xl border border-white/5 rounded-xl flex items-center gap-3">
                             <Shield className="w-3 h-3 text-blue-500" />
-                            <span className="text-[10px] font-mono text-gray-400">IDENTITY_LOCK: UNRESTRICTED</span>
+                            <span className="text-[10px] font-mono text-gray-400">IDENTITY_LOCK: veda</span>
                         </div>
                     </div>
 
