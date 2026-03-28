@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { FadeInBlock } from '@/components/ui/animated/GlowButton';
 import { TopBar } from '@/components/layout/TopBar';
+import { useVedaStore } from '@/lib/store';
 import { ModelSelector } from '@/components/ui/animated/ModelSelector';
 import { PromptAlchemist } from '@/components/ui/animated/PromptAlchemist';
 import { ImageCanvas } from '@/components/ui/animated/ImageCanvas';
@@ -23,9 +24,18 @@ export default function ImageStudio() {
     const [activeModelId, setActiveModelId] = useState(IMAGE_MODELS[0].id);
     const [prompt, setPrompt] = useState('');
 
+    const useCredits = useVedaStore((state) => state.useCredits);
+ 
     const handleForge = async () => {
         if (!prompt.trim()) return;
-        
+ 
+        // 0. Deduct Credits
+        const success = useCredits(5);
+        if (!success) {
+            alert("INSUFFICIENT NEURAL CREDITS. HARVEST MORE IN REWARDS SECTOR.");
+            return;
+        }
+ 
         setStatus('generating');
         try {
             const res = await fetch('/api/generations', {

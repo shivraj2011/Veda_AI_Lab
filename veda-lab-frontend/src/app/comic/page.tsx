@@ -1,12 +1,12 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { TopBar } from '@/components/layout/TopBar';
 import { FadeInBlock } from '@/components/ui/animated/GlowButton';
+import { useVedaStore } from '@/lib/store';
 import { Layers, Wand2, Sparkles, BookOpen, PenTool, Layout, Plus, Clapperboard, Zap } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { AnimatePresence } from 'framer-motion';
 
 const COMIC_MODELS = [
     { id: 'animagine-comic', name: 'Animagine XL 3.1', desc: 'SOTA anime and illustrative synthesis.', icon: Layers, color: 'blue', preview: 'https://images.unsplash.com/photo-1578632738981-4fe6506d393b?q=80&w=400&auto=format&fit=crop' },
@@ -18,9 +18,18 @@ export default function ComicStudio() {
     const [panels, setPanels] = useState<{image: string, caption: string}[]>([]);
     const [prompt, setPrompt] = useState('');
     const [activeModelId, setActiveModelId] = useState(COMIC_MODELS[0].id);
+    const useCredits = useVedaStore((state) => state.useCredits);
 
     const handleGenerate = async () => {
         if (!prompt.trim()) return;
+
+        // 0. Deduct Credits
+        const success = useCredits(10);
+        if (!success) {
+            alert("INSUFFICIENT NEURAL CREDITS. HARVEST MORE IN REWARDS SECTOR.");
+            return;
+        }
+
         setStatus('generating');
         try {
             const res = await fetch('/api/story', {

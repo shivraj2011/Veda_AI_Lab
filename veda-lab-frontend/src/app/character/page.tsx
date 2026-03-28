@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { TopBar } from '@/components/layout/TopBar';
 import { FadeInBlock } from '@/components/ui/animated/GlowButton';
 import { ModelSelector } from '@/components/ui/animated/ModelSelector';
+import { useVedaStore } from '@/lib/store';
 import { Users, UserPlus, Wand2, Terminal, Info, Zap, Settings, Shield, Brain, Layers, Fingerprint, MessageSquare } from 'lucide-react';
 import { GlowButton } from '@/components/ui/animated/GlowButton';
 
@@ -18,9 +19,18 @@ export default function CharacterForge() {
     const [imageUrl, setImageUrl] = useState<string>('');
     const [prompt, setPrompt] = useState('');
     const [activeModelId, setActiveModelId] = useState(PERSONA_MODELS[0].id);
+    const useCredits = useVedaStore((state) => state.useCredits);
 
     const handleGenerate = async () => {
         if (!prompt.trim()) return;
+
+        // 0. Deduct Credits
+        const success = useCredits(5);
+        if (!success) {
+            alert("INSUFFICIENT NEURAL CREDITS. HARVEST MORE IN REWARDS SECTOR.");
+            return;
+        }
+
         setStatus('generating');
         try {
             const res = await fetch('/api/generations', {

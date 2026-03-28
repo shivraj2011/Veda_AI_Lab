@@ -2,6 +2,7 @@
 
 import { PageWrapper } from '@/components/layout/PageWrapper';
 import { Sidebar } from '@/components/layout/Sidebar';
+import { CreditRefresher } from '@/components/logic/CreditRefresher';
 import { usePathname } from 'next/navigation';
 
 export function ClientLayout({ children }: { children: React.ReactNode }) {
@@ -29,6 +30,7 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
 
     return (
         <div className="flex h-screen w-screen bg-grid overflow-hidden relative">
+            <CreditRefresher />
             <Sidebar activeRoute={activeRoute} />
             <PageWrapper>
                 {children}

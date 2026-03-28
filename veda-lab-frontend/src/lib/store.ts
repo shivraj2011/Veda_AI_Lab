@@ -8,6 +8,7 @@ interface VedaState {
     isUncensored: boolean;
     userName: string;
     profileImage: string | null;
+    lastRefresh: number;
 
     // Actions
     setCredits: (credits: number) => void;
@@ -17,6 +18,7 @@ interface VedaState {
     setUserName: (name: string) => void;
     setProfileImage: (image: string | null) => void;
     useCredits: (amount: number, isNsfw?: boolean) => boolean;
+    refreshCredits: () => void;
 }
 
 export const useVedaStore = create<VedaState>()(
@@ -26,14 +28,14 @@ export const useVedaStore = create<VedaState>()(
             nsfwCredits: 50,
             activeModel: 'Veda-Forge (SDXL)',
             isUncensored: true,
+            userName: 'Veda Traveler',
+            profileImage: null,
+            lastRefresh: Date.now(),
 
             setCredits: (credits) => set({ credits }),
             setNsfwCredits: (nsfwCredits) => set({ nsfwCredits }),
             setActiveModel: (activeModel) => set({ activeModel }),
             toggleUncensored: () => set((state) => ({ isUncensored: !state.isUncensored })),
-            userName: 'Veda Traveler',
-            profileImage: null,
-
             setUserName: (userName) => set({ userName }),
             setProfileImage: (profileImage) => set({ profileImage }),
 
@@ -47,6 +49,21 @@ export const useVedaStore = create<VedaState>()(
                     set({ credits: currentCredits - amount });
                 }
                 return true;
+            },
+
+            refreshCredits: () => {
+                const now = Date.now();
+                const diff = now - get().lastRefresh;
+                const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
+
+                if (diff >= TWENTY_FOUR_HOURS) {
+                    set({ 
+                        credits: 100, 
+                        nsfwCredits: 50,
+                        lastRefresh: now 
+                    });
+                    console.log("CREDITS_REFILLED_SUCCESSFULLY");
+                }
             },
         }),
         {

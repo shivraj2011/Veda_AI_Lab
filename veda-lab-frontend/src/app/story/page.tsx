@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { TopBar } from '@/components/layout/TopBar';
 import { ModelSelector } from '@/components/ui/animated/ModelSelector';
 import { PromptAlchemist } from '@/components/ui/animated/PromptAlchemist';
+import { useVedaStore } from '@/lib/store';
 import { Sparkles, BookOpen, Wand2, Terminal, Info, Zap, Settings, Share2, Save, MessageSquare } from 'lucide-react';
 
 const STORY_MODELS = [
@@ -16,9 +17,18 @@ export default function StoryMode() {
     const [story, setStory] = useState('');
     const [prompt, setPrompt] = useState('');
     const [activeModelId, setActiveModelId] = useState(STORY_MODELS[0].id);
+    const useCredits = useVedaStore((state) => state.useCredits);
 
     const handleGenerate = async () => {
         if (!prompt.trim()) return;
+
+        // 0. Deduct Credits
+        const success = useCredits(10);
+        if (!success) {
+            alert("INSUFFICIENT NEURAL CREDITS. HARVEST MORE IN REWARDS SECTOR.");
+            return;
+        }
+
         setStatus('generating');
         setStory('');
         try {

@@ -1,4 +1,4 @@
-﻿import { 
+import { 
     MessageSquare, 
     Image as ImageIcon, 
     Film, 
@@ -156,7 +156,7 @@ export function HeroBillboard() {
                             transition={{ delay: 0.8, duration: 1 }}
                             className="text-xl md:text-2xl text-gray-500 font-light tracking-wide max-w-3xl mx-auto italic"
                         >
-                            The veda Frontier of <span className="text-white font-medium">Creative Machine Intelligence</span>
+                            The Veda Frontier of <span className="text-white font-medium">Creative Machine Intelligence</span>
                         </motion.p>
                     </div>
 
@@ -227,7 +227,7 @@ export function ToolCard({ title, description, icon, href, gradient }: ToolCardP
                     <p className="text-sm text-gray-500 font-medium leading-relaxed group-hover:text-gray-300 transition-colors duration-500 line-clamp-3 mb-8">{description}</p>
                     
                     <div className="flex items-center text-[9px] font-black uppercase tracking-[0.3em] text-[#00f2ff] opacity-40 group-hover:opacity-100 group-hover:translate-x-3 transition-all duration-500">
-                        INITIALIZE MODULE <span className="ml-2">â†’</span>
+                        INITIALIZE MODULE <span className="ml-2">→</span>
                     </div>
                 </div>
 

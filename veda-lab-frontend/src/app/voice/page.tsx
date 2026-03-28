@@ -6,13 +6,22 @@ import { TopBar } from '@/components/layout/TopBar';
 import { ModelSelector } from '@/components/ui/animated/ModelSelector';
 import { PromptAlchemist } from '@/components/ui/animated/PromptAlchemist';
 import { VoiceCanvas } from '@/components/ui/animated/VoiceCanvas';
+import { useVedaStore } from '@/lib/store';
 import { Mic, Music, Wand2, Terminal, Info, Zap, Settings, Volume2, Radio, Sliders } from 'lucide-react';
 
 export default function VoiceGenerator() {
     const [status, setStatus] = useState<'idle' | 'generating' | 'completed'>('idle');
     const [progress, setProgress] = useState(0);
+    const useCredits = useVedaStore((state) => state.useCredits);
 
     const handleGenerate = () => {
+        // 0. Deduct Credits
+        const success = useCredits(2);
+        if (!success) {
+            alert("INSUFFICIENT NEURAL CREDITS. HARVEST MORE IN REWARDS SECTOR.");
+            return;
+        }
+
         setStatus('generating');
         setProgress(0);
 

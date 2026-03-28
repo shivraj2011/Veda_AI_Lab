@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { FadeInBlock } from '@/components/ui/animated/GlowButton';
 import { TopBar } from '@/components/layout/TopBar';
 import { ModelSelector } from '@/components/ui/animated/ModelSelector';
+import { useVedaStore } from '@/lib/store';
 import { Terminal, Code, Cpu, Shield, Zap, Download, Share2, History } from 'lucide-react';
 
 const CODE_MODELS = [
@@ -17,10 +18,18 @@ export default function CodeStudio() {
     const [generatedCode, setGeneratedCode] = useState('');
     const [activeModelId, setActiveModelId] = useState(CODE_MODELS[0].id);
     const [prompt, setPrompt] = useState('');
+    const useCredits = useVedaStore((state) => state.useCredits);
 
     const handleSynthesize = async () => {
         if (!prompt.trim()) return;
         
+        // 0. Deduct Credits
+        const success = useCredits(2);
+        if (!success) {
+            alert("INSUFFICIENT NEURAL CREDITS. HARVEST MORE IN REWARDS SECTOR.");
+            return;
+        }
+
         setStatus('generating');
         setGeneratedCode('');
         

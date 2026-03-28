@@ -6,6 +6,7 @@ import { FadeInBlock } from '@/components/ui/animated/GlowButton';
 import { TopBar } from '@/components/layout/TopBar';
 import { ModelSelector } from '@/components/ui/animated/ModelSelector';
 import { PromptAlchemist } from '@/components/ui/animated/PromptAlchemist';
+import { useVedaStore } from '@/lib/store';
 import { Video, Wand2, Zap, Sparkles, Film } from 'lucide-react';
 
 const VIDEO_MODELS = [
@@ -18,9 +19,17 @@ export default function VideoStudio() {
     const [videoUrl, setVideoUrl] = useState<string>('');
     const [activeModelId, setActiveModelId] = useState(VIDEO_MODELS[0].id);
     const [prompt, setPrompt] = useState('');
+    const useCredits = useVedaStore((state) => state.useCredits);
 
     const handleGenerate = async () => {
         if (!prompt.trim()) return;
+
+        // 0. Deduct Credits
+        const success = useCredits(10);
+        if (!success) {
+            alert("INSUFFICIENT NEURAL CREDITS. HARVEST MORE IN REWARDS SECTOR.");
+            return;
+        }
 
         setStatus('generating');
         try {

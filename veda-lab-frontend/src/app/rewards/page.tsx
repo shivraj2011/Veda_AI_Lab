@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { motion } from 'framer-motion';
 import { TopBar } from '@/components/layout/TopBar';
@@ -17,7 +17,7 @@ const plans = [
     },
     {
         name: 'Veda Pro',
-        price: 'â‚¹250',
+        price: '₹250',
         credits: '500 Credits/mo',
         features: ['Priority Multi-Modal Nodes', 'NSFW Filters Unlocked', '4K Cinematic Video', '24% Extra Reward Yield from Ads', 'Unlimited High-Logic Chat'],
         accent: 'purple',
@@ -49,7 +49,7 @@ export default function RewardsPage() {
                                 FUEL YOUR <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00f2ff] to-[#a855f7] drop-shadow-[0_0_15px_rgba(0,242,255,0.3)]">CREATION.</span>
                             </h1>
                             <p className="text-xl text-gray-500 mb-10 font-medium italic">
-                                Elevate your neural experience with priority nodes, high-fidelity renders, and veda access.
+                                Elevate your neural experience with priority nodes, high-fidelity renders, and Veda Access.
                             </p>
                             
                             <div className="flex bg-white/5 p-1.5 rounded-2xl w-fit border border-white/10 mb-8">

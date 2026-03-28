@@ -7,6 +7,7 @@ import { Box, Upload, Zap, Layers, Cuboid } from 'lucide-react';
 import { useState } from 'react';
 import { ModelSelector } from '@/components/ui/animated/ModelSelector';
 import { GlowButton } from '@/components/ui/animated/GlowButton';
+import { useVedaStore } from '@/lib/store';
 
 const THREE_D_MODELS = [
     { id: 'triposr', name: 'TripoSR', desc: 'Fast image-to-3D mesh generation.', icon: Box, color: 'blue', preview: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400&auto=format&fit=crop', tags: ['Fast', 'Mesh'] },
@@ -17,8 +18,16 @@ export default function Studio3D() {
     const [status, setStatus] = useState<'idle' | 'generating' | 'completed' | 'error'>('idle');
     const [meshUrl, setMeshUrl] = useState<string>('');
     const [activeModelId, setActiveModelId] = useState(THREE_D_MODELS[0].id);
+    const useCredits = useVedaStore((state) => state.useCredits);
 
     const handleForge = async () => {
+        // 0. Deduct Credits
+        const success = useCredits(15);
+        if (!success) {
+            alert("INSUFFICIENT NEURAL CREDITS. HARVEST MORE IN REWARDS SECTOR.");
+            return;
+        }
+
         setStatus('generating');
         try {
             const res = await fetch('/api/3d', {
