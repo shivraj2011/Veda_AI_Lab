@@ -17,6 +17,14 @@ ComfyUI/venv/
 python_installer.exe
 *.exe
 
+# Persistent Storage & DB
+*.db
+server/prisma/dev.db
+server/dev.db
+public/generations/
+public/uploads/
+public/voices/
+
 # OS Files
 .DS_Store
-Thumbs.db
+Thumbs.db

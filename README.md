@@ -25,3 +25,5 @@ To launch the full laboratory, use the primary entry points in the root director
 - **Node.js**: For the frontend and server.
 - **Python**: For AI engines (Stable Diffusion, ComfyUI).
 - **Git**: For dependency management.
+
+#### Deployment v1.0.1 (Next.js 16 + React 19)
