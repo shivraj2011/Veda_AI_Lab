@@ -40,9 +40,19 @@ export function VedaLokAnimation() {
     const [phase, setPhase] = useState<"enter" | "text" | "exit" | "hidden">("enter");
 
     useEffect(() => {
+        // Check if animation has already played in this session
+        const hasPlayed = sessionStorage.getItem('vedalok_played');
+        if (hasPlayed) {
+            setPhase("hidden");
+            return;
+        }
+
         const t1 = setTimeout(() => setPhase("text"), 800);
         const t2 = setTimeout(() => setPhase("exit"), 4000);
-        const t3 = setTimeout(() => setPhase("hidden"), 5000);
+        const t3 = setTimeout(() => {
+            setPhase("hidden");
+            sessionStorage.setItem('vedalok_played', 'true');
+        }, 5000);
         return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
     }, []);
 
