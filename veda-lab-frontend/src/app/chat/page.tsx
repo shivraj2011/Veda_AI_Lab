@@ -1,9 +1,10 @@
-﻿'use client';
+'use client';
 
 import { TopBar } from '@/components/layout/TopBar';
 import { ChatMessage } from '@/components/ui/chat/ChatMessage';
 import { ChatInput } from '@/components/ui/chat/ChatInput';
 import { NeuralTyping } from '@/components/ui/chat/NeuralTyping';
+import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { MessageSquare, Bot, Cpu, Zap } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
@@ -12,10 +13,24 @@ export default function ChatView() {
     const [messages, setMessages] = useState<any[]>([]);
     const [isTyping, setIsTyping] = useState(false);
     const [chatId, setChatId] = useState<string | null>(null);
+    const [status, setStatus] = useState({ online: false, node: '3001' });
     const scrollRef = useRef<HTMLDivElement>(null);
 
     // Initial Chat Setup
     useEffect(() => {
+        const checkHealth = async () => {
+            try {
+                const hRes = await fetch('/api/health');
+                const hData = await hRes.json();
+                if (hData.status === 'online') {
+                    setStatus({ online: true, node: String(hData.node) });
+                }
+            } catch (e) {
+                setStatus({ online: false, node: 'OFFLINE' });
+            }
+        };
+        checkHealth();
+
         const initChat = async () => {
             try {
                 // Create a new chat session on the backend
@@ -138,11 +153,14 @@ export default function ChatView() {
                             </h2>
                             <div className="flex items-center gap-6 mt-2">
                                 <p className="text-[10px] text-gray-500 font-mono uppercase tracking-[0.3em] flex items-center gap-2 font-bold">
-                                    <span className="w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_8px_#10b981]"></span>
-                                    CORE_ONLINE // NODE_3001
+                                    <span className={cn(
+                                        "w-2 h-2 rounded-full shadow-[0_0_8px]",
+                                        status.online ? "bg-[#10b981] shadow-[#10b981]" : "bg-red-500 shadow-red-500"
+                                    )}></span>
+                                    {status.online ? 'CORE_ONLINE' : 'CORE_OFFLINE'} // NODE_{status.node}
                                 </p>
                                 <div className="w-px h-3 bg-white/10"></div>
-                                <p className="text-[10px] text-gray-500 font-mono uppercase tracking-[0.3em] font-bold">LATENCY: 12MS</p>
+                                <p className="text-[10px] text-gray-500 font-mono uppercase tracking-[0.3em] font-bold">LATENCY: {status.online ? '12MS' : 'N/A'}</p>
                             </div>
                         </div>
                     </div>

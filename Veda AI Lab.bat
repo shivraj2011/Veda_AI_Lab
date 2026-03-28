@@ -8,7 +8,7 @@ echo ==================================================
 echo.
 
 :: 1. Define URL
-set "APP_URL=http://localhost:3000"
+set "APP_URL=https://veda-ai-lab.vercel.app/"
 
 :: 2. Try Chrome
 if exist "C:\Program Files\Google\Chrome\Application\chrome.exe" (

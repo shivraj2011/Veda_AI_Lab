@@ -5,12 +5,8 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // @ts-ignore
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   async rewrites() {
-    const backendUrl = (process.env.BACKEND_URL || 'http://localhost:3001').trim();
+    const backendUrl = (process.env.BACKEND_URL || 'http://localhost:3001').trim().replace(/\/$/, '');
     return [
       {
         source: '/api/:path*',
