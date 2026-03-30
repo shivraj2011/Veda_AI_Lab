@@ -1,6 +1,16 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+interface UIState {
+    isMobileMenuOpen: boolean;
+    setMobileMenuOpen: (open: boolean) => void;
+}
+
+export const useUIStore = create<UIState>((set) => ({
+    isMobileMenuOpen: false,
+    setMobileMenuOpen: (isMobileMenuOpen) => set({ isMobileMenuOpen })
+}));
+
 interface VedaState {
     credits: number;
     nsfwCredits: number;

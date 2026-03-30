@@ -7,16 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
-const galleryItems = [
-    { id: 1, type: 'image', url: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=800&auto=format&fit=crop', aspect: 'aspect-[4/5]', title: 'Cyber Nebula' },
-    { id: 2, type: 'video', url: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop', aspect: 'aspect-video', title: 'Neural Flow' },
-    { id: 3, type: 'image', url: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800&auto=format&fit=crop', aspect: 'aspect-square', title: 'Data Crystal' },
-    { id: 4, type: 'image', url: 'https://images.unsplash.com/photo-1614728263952-84ea256f9679?q=80&w=800&auto=format&fit=crop', aspect: 'aspect-[3/4]', title: 'Void Core' },
-    { id: 5, type: 'video', url: 'https://images.unsplash.com/photo-1547082299-de196ea013d6?q=80&w=800&auto=format&fit=crop', aspect: 'aspect-[9/16]', title: 'Vertical Synth' },
-    { id: 6, type: 'image', url: 'https://images.unsplash.com/photo-1578632738981-4320f6618d17?q=80&w=800&auto=format&fit=crop', aspect: 'aspect-video', title: 'Anime Horizon' },
-    { id: 7, type: 'image', url: 'https://images.unsplash.com/photo-1620121692029-d088224efc74?q=80&w=800&auto=format&fit=crop', aspect: 'aspect-square', title: 'Glass Fractal' },
-    { id: 8, type: 'video', url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop', aspect: 'aspect-[2/3]', title: 'Abstract Loop' },
-];
+const galleryItems: any[] = [];
 
 export default function GalleryPage() {
     const [hoveredId, setHoveredId] = useState<number | null>(null);
@@ -55,8 +46,13 @@ export default function GalleryPage() {
                 </FadeInBlock>
 
                 <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6 pb-20">
-                    {galleryItems.map((item, i) => (
-                        <FadeInBlock key={item.id} delay={0.1 * (i % 5)}>
+                    {galleryItems.length === 0 ? (
+                        <div className="col-span-full break-inside-avoid text-center py-20 text-gray-500 font-mono text-sm tracking-widest uppercase italic border border-white/5 rounded-3xl bg-white/[0.02]">
+                            Vault is empty. Forge your first digital asset.
+                        </div>
+                    ) : (
+                        galleryItems.map((item, i) => (
+                            <FadeInBlock key={item.id} delay={0.1 * (i % 5)}>
                             <motion.div
                                 className={cn(
                                     "relative rounded-[2rem] overflow-hidden border border-white/5 bg-[#050505] transition-all duration-500 group cursor-pointer",
@@ -131,7 +127,7 @@ export default function GalleryPage() {
                                 </div>
                             </motion.div>
                         </FadeInBlock>
-                    ))}
+                    )))}
                 </div>
             </div>
         </main>

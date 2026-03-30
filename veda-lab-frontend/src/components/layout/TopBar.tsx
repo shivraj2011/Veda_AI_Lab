@@ -1,7 +1,7 @@
 'use client';
 
-import { Search, Bell, History, User, Settings, LogOut, ChevronDown, Zap, Coins } from 'lucide-react';
-import { useVedaStore } from '@/lib/store';
+import { Search, Bell, History, User, Settings, LogOut, ChevronDown, Zap, Coins, Menu } from 'lucide-react';
+import { useVedaStore, useUIStore } from '@/lib/store';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
@@ -16,11 +16,18 @@ export function TopBar({ title = "Dashboard", onHistoryToggle }: TopBarProps) {
     const credits = useVedaStore((state) => state.credits);
     const nsfwCredits = useVedaStore((state) => state.nsfwCredits);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
+    const { isMobileMenuOpen, setMobileMenuOpen } = useUIStore();
 
     return (
-        <header className="bg-[#050505]/80 backdrop-blur-3xl border-b border-white/10 px-6 py-4 flex items-center justify-between gap-4 flex-shrink-0 relative z-40">
-            <div className="flex items-center gap-2">
-                <h1 className="text-xl font-black text-white tracking-widest uppercase italic bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent">
+        <header className="bg-[#050505]/80 backdrop-blur-3xl border-b border-white/10 px-4 md:px-6 py-4 flex items-center justify-between gap-2 md:gap-4 flex-shrink-0 relative z-40">
+            <div className="flex items-center gap-2 md:gap-4">
+                <button 
+                    onClick={() => setMobileMenuOpen(true)}
+                    className="md:hidden p-2 hover:bg-white/5 rounded-xl text-white mr-1"
+                >
+                    <Menu className="w-5 h-5" />
+                </button>
+                <h1 className="text-lg md:text-xl font-black text-white tracking-widest uppercase italic bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent truncate hidden sm:block">
                     {title === "Dashboard" ? "VEDA AI LAB" : title}
                 </h1>
             </div>

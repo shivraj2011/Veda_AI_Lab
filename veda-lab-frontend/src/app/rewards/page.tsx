@@ -37,15 +37,15 @@ export default function RewardsPage() {
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/5 blur-[120px] rounded-full"></div>
             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-500/5 blur-[120px] rounded-full"></div>
 
-            <div className="flex-1 overflow-y-auto p-12 custom-scrollbar relative z-10">
+            <div className="flex-1 overflow-y-auto p-4 md:p-12 custom-scrollbar relative z-10">
                 {/* REWARDS HERO */}
                 <FadeInBlock delay={0}>
-                    <div className="bg-[#020202] border border-white/10 rounded-[3rem] p-16 mb-12 flex flex-col md:flex-row items-center justify-between gap-12 relative overflow-hidden group hover:neon-border-glow transition-all duration-700">
+                    <div className="bg-[#020202] border border-white/10 rounded-[3rem] p-8 md:p-16 mb-12 flex flex-col md:flex-row items-center justify-between gap-12 relative overflow-hidden group hover:neon-border-glow transition-all duration-700">
                         <div className="relative z-10 max-w-2xl">
                             <div className="flex items-center gap-3 mb-6 text-[#00f2ff] font-mono text-[10px] font-black tracking-[0.5em] uppercase">
                                 <Star className="w-5 h-5 drop-shadow-[0_0_8px_#00f2ff]" /> VEDA_SUBSCRIPTIONS_v3_
                             </div>
-                            <h1 className="text-6xl md:text-7xl font-black mb-6 tracking-tighter leading-none uppercase italic">
+                            <h1 className="text-4xl md:text-7xl font-black mb-6 tracking-tighter leading-none uppercase italic">
                                 FUEL YOUR <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00f2ff] to-[#a855f7] drop-shadow-[0_0_15px_rgba(0,242,255,0.3)]">CREATION.</span>
                             </h1>
                             <p className="text-xl text-gray-500 mb-10 font-medium italic">
@@ -87,8 +87,8 @@ export default function RewardsPage() {
                         <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto mb-20">
                             {plans.map((plan, idx) => (
                                 <div key={plan.name} className={cn(
-                                    "relative rounded-[2.5rem] p-12 border h-full flex flex-col transition-all duration-700 hover:-translate-y-4 shadow-2xl overflow-hidden group",
-                                    plan.popular ? "bg-[#0c0c0c] border-[#a855f7]/50 shadow-[0_0_60px_rgba(168,85,247,0.1)] scale-105" : "bg-[#020202] border-white/5 hover:neon-border-glow"
+                                    "relative rounded-[2.5rem] p-8 md:p-12 border h-full flex flex-col transition-all duration-700 hover:-translate-y-4 shadow-2xl overflow-hidden group",
+                                    plan.popular ? "bg-[#0c0c0c] border-[#a855f7]/50 shadow-[0_0_60px_rgba(168,85,247,0.1)] md:scale-105" : "bg-[#020202] border-white/5 hover:neon-border-glow"
                                 )}>
                                     <div className="mb-10 relative z-10">
                                         <h3 className="text-3xl font-black mb-2 uppercase italic tracking-tight group-hover:text-[#00f2ff] transition-colors">{plan.name}</h3>
@@ -125,12 +125,12 @@ export default function RewardsPage() {
                     <FadeInBlock delay={0.1}>
                         <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto mb-20">
                             {/* WATCH ADS CARD */}
-                            <div className="bg-[#020202] border border-white/5 rounded-[2.5rem] p-12 relative overflow-hidden group hover:neon-border-glow transition-all cursor-pointer">
+                            <div className="bg-[#020202] border border-white/5 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden group hover:neon-border-glow transition-all cursor-pointer">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-[60px] rounded-full"></div>
                                 <div className="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center border border-blue-500/20 mb-8 group-hover:scale-110 transition-transform">
                                     <Play className="w-8 h-8 text-blue-400 fill-blue-400/20" />
                                 </div>
-                                <h3 className="text-3xl font-black mb-4 uppercase italic">NEURAL_ADS</h3>
+                                <h3 className="text-2xl md:text-3xl font-black mb-4 uppercase italic">NEURAL_ADS</h3>
                                 <p className="text-gray-500 text-sm mb-10 italic">Watch high-fidelity sponsor sequences to refuel your credit cells instantly.</p>
                                 <div className="flex items-center justify-between mb-8 pb-8 border-b border-white/5">
                                     <span className="text-gray-600 text-[10px] font-black tracking-widest uppercase">Yield_Per_Sequence</span>
@@ -140,12 +140,12 @@ export default function RewardsPage() {
                             </div>
 
                             {/* PLAY GAMES CARD */}
-                            <div className="bg-[#020202] border border-white/5 rounded-[2.5rem] p-12 relative overflow-hidden group hover:neon-border-glow transition-all cursor-pointer">
+                            <div className="bg-[#020202] border border-white/5 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden group hover:neon-border-glow transition-all cursor-pointer">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 blur-[60px] rounded-full"></div>
                                 <div className="w-16 h-16 bg-amber-500/10 rounded-2xl flex items-center justify-center border border-amber-500/20 mb-8 group-hover:scale-110 transition-transform">
                                     <Gamepad2 className="w-8 h-8 text-amber-500" />
                                 </div>
-                                <h3 className="text-3xl font-black mb-4 uppercase italic">REWARD_GAMES</h3>
+                                <h3 className="text-2xl md:text-3xl font-black mb-4 uppercase italic">REWARD_GAMES</h3>
                                 <p className="text-gray-500 text-sm mb-10 italic">Engage in rapid-response cognitive tests to harvest extra generation power.</p>
                                 <div className="flex items-center justify-between mb-8 pb-8 border-b border-white/5">
                                     <span className="text-gray-600 text-[10px] font-black tracking-widest uppercase">Potential_Harvest</span>

@@ -29,23 +29,25 @@ const ICON_MAP: Record<string, LucideIcon> = {
 interface StatProps {
     label: string;
     value: string;
-    icon: string;
+    icon: LucideIcon;
     gradient: string;
 }
 
-export function StatCard({ label, value, icon, gradient }: StatProps) {
+export function StatCard({ label, value, icon: Icon, gradient }: StatProps) {
     return (
         <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             whileHover={{ y: -5, scale: 1.02 }}
-            className="bg-black/60 backdrop-blur-2xl border border-white/5 rounded-2xl p-5 text-center transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.5)] group"
+            className="bg-black/60 backdrop-blur-2xl border border-white/5 rounded-2xl p-4 md:p-5 text-center transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.5)] group h-full flex flex-col items-center justify-center"
         >
-            <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">{icon}</div>
-            <div className={cn("text-3xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r", gradient)}>
+            <div className="mb-3 group-hover:scale-110 transition-transform duration-300">
+                <Icon className={cn("w-8 h-8 md:w-10 md:h-10 text-white", gradient.replace('from-', 'text-').split(' ')[0])} />
+            </div>
+            <div className={cn("text-2xl md:text-3xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r", gradient)}>
                 {value}
             </div>
-            <div className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em] mt-2 leading-none">{label}</div>
+            <div className="text-[9px] md:text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em] mt-2 leading-none">{label}</div>
         </motion.div>
     );
 }

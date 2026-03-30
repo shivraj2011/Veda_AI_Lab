@@ -1,10 +1,11 @@
-﻿'use client';
+'use client';
 
 import { motion } from 'framer-motion';
 import { HeroBillboard, ToolCard, StatCard } from '@/components/layout/Dashboard';
 import { FadeInBlock } from '@/components/ui/animated/GlowButton';
 import { TopBar } from '@/components/layout/TopBar';
 import Link from 'next/link';
+import { Globe, Palette, Flame, Brain } from 'lucide-react';
 
 const TOOLS = [
     {
@@ -66,10 +67,10 @@ const TOOLS = [
 ];
 
 const STATS = [
-    { label: "Neural Nodes", value: "8188", icon: "ðŸŒ", gradient: "from-blue-400 to-cyan-400" },
-    { label: "Visual Forged", value: "2.4M", icon: "ðŸŽ¨", gradient: "from-amber-400 to-orange-400" },
-    { label: "Active Synthesis", value: "142K", icon: "ðŸ”¥", gradient: "from-purple-400 to-pink-400" },
-    { label: "Logical Units", value: "9.8B", icon: "ðŸ§ ", gradient: "from-emerald-400 to-teal-400" }
+    { label: "Neural Nodes", value: "8188", icon: Globe, gradient: "from-blue-400 to-cyan-400" },
+    { label: "Visual Forged", value: "2.4M", icon: Palette, gradient: "from-amber-400 to-orange-400" },
+    { label: "Active Synthesis", value: "142K", icon: Flame, gradient: "from-purple-400 to-pink-400" },
+    { label: "Logical Units", value: "9.8B", icon: Brain, gradient: "from-emerald-400 to-teal-400" }
 ];
 
 export default function Home() {
@@ -80,7 +81,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-[#020202] z-0"></div>
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-blue-500/5 via-transparent to-transparent z-10 pointer-events-none"></div>
 
-            <div className="p-12 md:p-20 relative z-20 space-y-32">
+            <div className="p-5 md:p-20 relative z-20 space-y-20 md:space-y-32">
                 {/* HERO SECTION */}
                 <HeroBillboard />
 
@@ -97,7 +98,7 @@ export default function Home() {
                         <div className="flex flex-col md:flex-row items-end justify-between mb-20 gap-8">
                             <div>
                                 <h1 className="text-[10px] font-black uppercase text-amber-500 tracking-[0.6em] mb-4 italic">SYNTHESIS_HUB_v01</h1>
-                                <h2 className="text-6xl md:text-8xl font-black text-white leading-none tracking-tighter uppercase italic">VEDA NEURAL<br />ORCHESTRATOR</h2>
+                                <h2 className="text-4xl md:text-8xl font-black text-white leading-none tracking-tighter uppercase italic">VEDA NEURAL<br />ORCHESTRATOR</h2>
                             </div>
                             <p className="max-w-md text-gray-500 font-medium text-lg leading-relaxed italic border-l-2 border-white/10 pl-8">
                                 Select a specialized neural module to initialize your creative synthesis sequence. All nodes are veda for maximum freedom.
@@ -116,9 +117,9 @@ export default function Home() {
                 <FadeInBlock delay={0.4}>
                     <div className="relative rounded-[4rem] bg-[#0c0c0c] border border-white/5 p-20 overflow-hidden group hover:neon-border-glow transition-all duration-1000 text-center">
                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
-                        <h3 className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tighter uppercase italic">Unlock Veda Pro</h3>
+                        <h3 className="text-4xl md:text-7xl font-black text-white mb-8 tracking-tighter uppercase italic">Unlock Veda Pro</h3>
                         <p className="text-gray-500 text-xl max-w-2xl mx-auto mb-12 italic">Join Veda Subscriptions for multi-modal priority access, NSFW unlocks, and high-performance neural nodes.</p>
-                        <Link href="/rewards" className="inline-block px-16 py-6 bg-white text-black font-black rounded-3xl text-sm tracking-[0.4em] uppercase hover:bg-blue-500 hover:text-white transition-all shadow-2xl italic">
+                        <Link href="/rewards" className="inline-block px-8 md:px-16 py-4 md:py-6 bg-white text-black font-black rounded-3xl text-xs md:text-sm tracking-[0.2em] md:tracking-[0.4em] uppercase hover:bg-blue-500 hover:text-white transition-all shadow-2xl italic">
                             MANAGE_SUBSCRIPTION
                         </Link>
                     </div>
