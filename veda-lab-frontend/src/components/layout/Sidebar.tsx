@@ -1,6 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
+import { useUIStore } from '@/lib/store';
 import {
     LayoutDashboard,
     MessageSquare,
@@ -38,11 +39,13 @@ const navConfig = [
     { id: 'profile', title: 'Identity', icon: User, path: '/profile' },
 ];
 
-export function Sidebar({ activeRoute = 'dashboard', isOpen, onClose }: { activeRoute?: string, isOpen?: boolean, onClose?: () => void }) {
+export function Sidebar({ activeRoute = 'dashboard' }: { activeRoute?: string }) {
+    const { isMobileMenuOpen, setMobileMenuOpen } = useUIStore();
+    
     return (
         <aside className={cn(
             "w-64 flex-shrink-0 bg-[#050505]/95 backdrop-blur-3xl border-r border-white/10 flex flex-col z-50 transition-transform duration-300 md:translate-x-0 h-full",
-            isOpen ? "translate-x-0 fixed left-0 top-0 bottom-0 shadow-2xl" : "-translate-x-full fixed md:relative"
+            isMobileMenuOpen ? "translate-x-0 fixed left-0 top-0 bottom-0 shadow-2xl" : "-translate-x-full fixed md:relative"
         )}>
             {/* Header */}
             <header className="p-6 flex flex-col gap-2 border-b border-white/10">
@@ -75,7 +78,7 @@ export function Sidebar({ activeRoute = 'dashboard', isOpen, onClose }: { active
                             <li key={item.id}>
                                 <Link
                                     href={item.path}
-                                    onClick={onClose}
+                                    onClick={() => setMobileMenuOpen(false)}
                                     className={cn(
                                         "w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 group relative overflow-hidden",
                                         isActive

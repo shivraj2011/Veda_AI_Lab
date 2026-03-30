@@ -54,8 +54,8 @@ export function StatCard({ label, value, icon: Icon, gradient }: StatProps) {
 
 export function HeroBillboard() {
     return (
-        <section className="relative group perspective-2000 overflow-hidden rounded-[3rem]">
-            <div className="relative overflow-hidden rounded-[3rem] bg-[#050505] border border-white/10 p-12 md:p-24 transition-all duration-1000 shadow-[0_0_150px_rgba(251,191,36,0.1)] flex flex-col items-center justify-center min-h-[600px]">
+        <section className="relative group perspective-2000 overflow-hidden rounded-3xl md:rounded-[3rem] mx-4 md:mx-0">
+            <div className="relative overflow-hidden rounded-3xl md:rounded-[3rem] bg-[#050505] border border-white/10 p-6 md:p-12 lg:p-24 transition-all duration-1000 shadow-[0_0_150px_rgba(251,191,36,0.1)] flex flex-col items-center justify-center min-h-[400px] md:min-h-[600px]">
                 
                 {/* Immersive Background Layer */}
                 <div className="absolute inset-0 z-0">
@@ -66,7 +66,7 @@ export function HeroBillboard() {
 
                 <div className="relative z-10 flex flex-col items-center w-full">
                     {/* The "Veda Core" - Animated Brand Hub */}
-                    <div className="mb-16 relative flex justify-center items-center scale-110 md:scale-125">
+                    <div className="mb-10 md:mb-16 relative flex justify-center items-center scale-75 md:scale-125">
                         {/* Animated Logo Spheres / Rings */}
                         {[1, 2, 3].map((i) => (
                             <motion.div 
@@ -142,9 +142,9 @@ export function HeroBillboard() {
                             transition={{ duration: 1.2, ease: "easeOut" }}
                             className="relative inline-block"
                         >
-                            <h1 className="text-7xl md:text-[10rem] font-black mb-6 leading-[0.8] tracking-[-0.07em] uppercase">
+                            <h1 className="text-5xl md:text-7xl lg:text-[10rem] font-black mb-6 leading-[0.8] tracking-[-0.07em] uppercase">
                                 <span className="text-white block">VEDA AI</span>
-                                <span className="bg-gradient-to-r from-amber-200 via-amber-500 to-amber-200 bg-clip-text text-transparent block drop-shadow-[0_0_30px_rgba(251,191,36,0.3)]">LABORATORY</span>
+                                <span className="bg-gradient-to-r from-amber-200 via-amber-500 to-amber-200 bg-clip-text text-transparent block drop-shadow-[0_0_30px_rgba(251,191,36,0.3)] mt-2">LABORATORY</span>
                             </h1>
                             
                             {/* Floating decorative elements */}
@@ -163,8 +163,8 @@ export function HeroBillboard() {
                     </div>
 
                     {/* Technical Status Bar */}
-                    <div className="glass-holographic rounded-full px-10 py-4 flex flex-wrap justify-center gap-10 text-[10px] font-bold uppercase tracking-[0.2em] mb-20 border-white/5 shadow-2xl">
-                        <div className="flex items-center gap-3">
+                    <div className="glass-holographic rounded-full px-6 md:px-10 py-3 md:py-4 flex flex-wrap justify-center gap-4 md:gap-10 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-12 md:mb-20 border-white/5 shadow-2xl">
+                        <div className="flex items-center gap-2 md:gap-3">
                             <div className="h-1.5 w-1.5 rounded-full bg-[#10b981] shadow-[0_0_10px_#10b981]"></div>
                             <span className="text-[#10b981]/80">CORE: OPTIMIZED</span>
                         </div>
@@ -221,11 +221,11 @@ export function ToolCard({ title, description, icon, href, gradient }: ToolCardP
                 <div className={cn("absolute -inset-10 opacity-0 group-hover:opacity-10 blur-[80px] transition-opacity duration-1000 bg-gradient-to-br", gradient)}></div>
                 
                 <div className="relative z-10">
-                    <div className={cn("w-20 h-20 rounded-3xl bg-gradient-to-br p-5 mb-8 group-hover:scale-110 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex items-center justify-center", gradient)}>
+                    <div className={cn("w-16 h-16 md:w-20 md:h-20 rounded-2xl md:rounded-3xl bg-gradient-to-br p-4 mb-6 md:mb-8 group-hover:scale-110 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex items-center justify-center", gradient)}>
                         <Icon className="w-full h-full text-white drop-shadow-lg" />
                     </div>
                     
-                    <h3 className="text-3xl font-black text-white mb-4 tracking-tighter group-hover:text-[#00f2ff] transition-colors duration-500 uppercase">{title}</h3>
+                    <h3 className="text-2xl md:text-3xl font-black text-white mb-3 md:mb-4 tracking-tighter group-hover:text-[#00f2ff] transition-colors duration-500 uppercase">{title}</h3>
                     <p className="text-sm text-gray-500 font-medium leading-relaxed group-hover:text-gray-300 transition-colors duration-500 line-clamp-3 mb-8">{description}</p>
                     
                     <div className="flex items-center text-[9px] font-black uppercase tracking-[0.3em] text-[#00f2ff] opacity-40 group-hover:opacity-100 group-hover:translate-x-3 transition-all duration-500">
