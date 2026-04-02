@@ -175,13 +175,13 @@ export default function ChatView() {
                                     value={selectedModel}
                                     onChange={(e) => setSelectedModel(e.target.value as any)}
                                 >
-                                    <option value="dolphin" className="bg-[#111] text-white text-lg">DOLPHIN 3.0 (24B)</option>
-                                    <option value="mythomax" className="bg-[#111] text-white text-lg">MYTHOMAX (13B)</option>
+                                    <option value="dolphin" className="bg-[#111] text-white text-lg">DOLPHIN MISTRAL (24B)</option>
+                                    <option value="mythomax" className="bg-[#111] text-white text-lg">HERMES 3 (405B)</option>
                                 </select>
                                 <span className="text-[10px] bg-[#00f2ff]/10 text-[#00f2ff] px-4 py-1.5 rounded-xl border border-[#00f2ff]/20 font-black tracking-widest uppercase">Verified</span>
                             </div>
                             <p className="text-[11px] text-zinc-400 mt-1 uppercase tracking-wider font-semibold">
-                                {selectedModel === 'dolphin' ? '// UNCENSORED CORE INTELLIGENCE' : '// UNRESTRICTED ROLEPLAY & STORYTELLING'}
+                                {selectedModel === 'dolphin' ? '// UNCENSORED VENICE CORE' : '// UNRESTRICTED HERMES KNOWLEDGE'}
                             </p>
                             <div className="flex items-center gap-6 mt-2">
                                 <p className="text-[10px] text-gray-500 font-mono uppercase tracking-[0.3em] flex items-center gap-2 font-bold">

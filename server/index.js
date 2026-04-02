@@ -156,7 +156,7 @@ app.post('/api/completion', async (req, res) => {
                     'X-Title': 'Veda AI Lab'
                 },
                 body: JSON.stringify({
-                    model: 'cognitivecomputations/dolphin3.0-r1-mistral-24b:free',
+                    model: 'cognitivecomputations/dolphin-mistral-24b-venice-edition:free',
                     messages: [{ role: 'user', content: prompt }],
                     stream: false,
                     max_tokens: 1024

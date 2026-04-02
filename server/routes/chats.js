@@ -175,9 +175,9 @@ router.post('/message', async (req, res) => {
             const contextMessages = [systemPrompt, ...history];
             
             // Map the frontend model string to an OpenRouter model
-            let openRouterModel = 'cognitivecomputations/dolphin3.0-r1-mistral-24b:free';
+            let openRouterModel = 'cognitivecomputations/dolphin-mistral-24b-venice-edition:free';
             if (model && model.toLowerCase().includes('mythomax')) {
-                openRouterModel = 'gryphe/mythomax-l2-13b:free'; 
+                openRouterModel = 'nousresearch/hermes-3-llama-3.1-405b:free'; 
             }
 
             console.log(`[OpenRouter] Stream request for model: ${openRouterModel}`, { messagesCount: history.length });
@@ -282,7 +282,7 @@ async function triggerAutoTitle(history, chatId, content, model, isClaude) {
                     'X-Title': 'Veda AI Lab'
                 },
                 body: JSON.stringify({
-                    model: 'cognitivecomputations/dolphin3.0-r1-mistral-24b:free', // Fast model
+                    model: 'cognitivecomputations/dolphin-mistral-24b-venice-edition:free', // Fast model
                     messages: [{ role: 'user', content: titlePrompt }],
                     stream: false,
                     max_tokens: 20
