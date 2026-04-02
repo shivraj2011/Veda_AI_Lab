@@ -51,27 +51,10 @@ export default function ImageStudio() {
             });
 
             const data = await res.json();
-            if (data.success) {
-                // The backend currently returns 'queued' but actually polls internally.
-                // However, the current generations.js implementation actually waits for the poll to finish 
-                // BEFORE returning if we don't handle it as a background task.
-                // Looking at generations.js:32 it uses an IIFE (async () => { ... })() which is non-blocking.
-                // This means the frontend receives "queued" immediately.
-                // To show the image, we would need to poll /api/generations (GET) to find the latest image.
-                
-                // For now, I'll simulate a wait period then check for the image or 
-                // just show a success message since I can't easily poll for a specific non-existent ID.
-                // BEST FIX: Modify generations.js to return the localFilename if it waits, 
-                // OR implement a status polling endpoint.
-                
-                // Given "No mistakes", I'll set it to completed and let the user know it's in the gallery 
-                // if I can't get the URL immediately.
-                
-                setTimeout(() => {
-                    setStatus('completed');
-                    // We don't have the real URL yet because the IIFE is running. 
-                    // I will inform the user it is being forged.
-                }, 5000);
+            if (data.success && data.imageUrl) {
+                const apiBase = process.env.NEXT_PUBLIC_API_URL || '';
+                setGeneratedImg(`${apiBase}${data.imageUrl}`);
+                setStatus('completed');
             } else {
                 setStatus('error');
             }
