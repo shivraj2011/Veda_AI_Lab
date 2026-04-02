@@ -83,7 +83,8 @@ export default function ChatView() {
         setIsTyping(true);
 
         try {
-            const response = await fetch('/api/chats/message', {
+            const apiBase = process.env.NEXT_PUBLIC_API_URL || '';
+            const response = await fetch(`${apiBase}/api/chats/message`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
