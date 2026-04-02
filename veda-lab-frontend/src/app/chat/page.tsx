@@ -15,6 +15,7 @@ export default function ChatView() {
     const [isTyping, setIsTyping] = useState(false);
     const [chatId, setChatId] = useState<string | null>(null);
     const [status, setStatus] = useState({ online: false, node: '3001' });
+    const [selectedModel, setSelectedModel] = useState<'dolphin' | 'mythomax'>('dolphin');
     const scrollRef = useRef<HTMLDivElement>(null);
     const useCredits = useVedaStore((state) => state.useCredits);
 
@@ -88,7 +89,7 @@ export default function ChatView() {
                 body: JSON.stringify({
                     chatId: chatId,
                     content: text,
-                    model: 'dolphin-llama3:latest'
+                    model: selectedModel
                 })
             });
 
@@ -121,6 +122,16 @@ export default function ChatView() {
                         }
                         try {
                             const data = JSON.parse(dataStr);
+                            if (data.error) {
+                                console.error("Stream payload error:", data.error);
+                                setMessages(prev => {
+                                    const newMsgs = [...prev];
+                                    newMsgs[newMsgs.length - 1].content = `⚠️ NEURAL LINK FAILED: ${data.error}`;
+                                    return newMsgs;
+                                });
+                                setIsTyping(false);
+                                return; // Stop processing stream
+                            }
                             if (data.token) {
                                 assistantMessage += data.token;
                                 setMessages(prev => {
@@ -129,7 +140,9 @@ export default function ChatView() {
                                     return newMsgs;
                                 });
                             }
-                        } catch (e) {}
+                        } catch (e) {
+                            // ignore fragment parsing error
+                        }
                     }
                 }
             }
@@ -156,10 +169,20 @@ export default function ChatView() {
                             <MessageSquare className="w-8 h-8 text-[#00f2ff] relative z-10 drop-shadow-[0_0_8px_#00f2ff]" />
                         </div>
                         <div>
-                            <h2 className="text-3xl font-black text-white flex items-center gap-4 tracking-tighter">
-                                DOLPHIN-LLAMA-3 (8B)
+                            <div className="flex items-center gap-4">
+                                <select 
+                                    className="bg-transparent text-3xl font-black text-white hover:text-[#00f2ff] cursor-pointer outline-none border-b border-transparent hover:border-[#00f2ff]/30 pb-1 uppercase tracking-tighter transition-all"
+                                    value={selectedModel}
+                                    onChange={(e) => setSelectedModel(e.target.value as any)}
+                                >
+                                    <option value="dolphin" className="bg-[#111] text-white text-lg">DOLPHIN 3.0 (24B)</option>
+                                    <option value="mythomax" className="bg-[#111] text-white text-lg">MYTHOMAX (13B)</option>
+                                </select>
                                 <span className="text-[10px] bg-[#00f2ff]/10 text-[#00f2ff] px-4 py-1.5 rounded-xl border border-[#00f2ff]/20 font-black tracking-widest uppercase">Verified</span>
-                            </h2>
+                            </div>
+                            <p className="text-[11px] text-zinc-400 mt-1 uppercase tracking-wider font-semibold">
+                                {selectedModel === 'dolphin' ? '// UNCENSORED CORE INTELLIGENCE' : '// UNRESTRICTED ROLEPLAY & STORYTELLING'}
+                            </p>
                             <div className="flex items-center gap-6 mt-2">
                                 <p className="text-[10px] text-gray-500 font-mono uppercase tracking-[0.3em] flex items-center gap-2 font-bold">
                                     <span className={cn(

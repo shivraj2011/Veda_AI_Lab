@@ -37,24 +37,30 @@ router.post('/', async (req, res) => {
 router.post('/completion', async (req, res) => {
     try {
         const { prompt, model } = req.body;
-        const a1111Url = process.env.OLLAMA_URL || "http://127.0.0.1:11434"; // Reusing var name for Ollama URL
+        const apiKey = process.env.TOGETHER_API_KEY;
+        if (!apiKey) throw new Error("Missing TOGETHER_API_KEY in .env");
 
-        console.log(`[Completion] Generating for: "${prompt.substring(0, 50)}..."`);
+        console.log(`[Completion] Generating via Together AI for: "${prompt.substring(0, 50)}..."`);
 
-        const response = await fetch(`${a1111Url}/api/generate`, {
+        const response = await fetch("https://api.together.xyz/v1/chat/completions", {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`
+            },
             body: JSON.stringify({
-                model: model || 'llama3:latest',
-                prompt: prompt,
-                stream: false
+                model: 'meta-llama/Llama-3-8b-chat-hf',
+                messages: [{ role: 'user', content: prompt }],
+                stream: false,
+                max_tokens: 1024
             })
         });
 
-        if (!response.ok) throw new Error(`Ollama Error: ${response.statusText}`);
+        if (!response.ok) throw new Error(`Together AI Error: ${response.statusText}`);
 
         const data = await response.json();
-        res.json({ reply: data.response });
+        const reply = data.choices && data.choices[0] ? data.choices[0].message.content : "Error generating reply.";
+        res.json({ reply });
 
     } catch (error) {
         console.error("Completion Error:", error);
@@ -158,31 +164,47 @@ router.post('/message', async (req, res) => {
             });
 
         } else {
-            // --- OLLAMA LOGIC ---
-            const a1111Url = process.env.OLLAMA_URL || "http://127.0.0.1:11434";
+            // --- OPENROUTER LOGIC ---
+            const apiKey = process.env.OPENROUTER_API_KEY;
+            if (!apiKey) {
+                res.write(`data: ${JSON.stringify({ error: "Missing OPENROUTER_API_KEY in .env file" })}\n\n`);
+                return res.end();
+            }
 
             // Always ensure the system prompt is the first message for the context sent to AI
             const contextMessages = [systemPrompt, ...history];
+            
+            // Map the frontend model string to an OpenRouter model
+            let openRouterModel = 'cognitivecomputations/dolphin3.0-r1-mistral-24b:free';
+            if (model && model.toLowerCase().includes('mythomax')) {
+                openRouterModel = 'gryphe/mythomax-l2-13b:free'; 
+            }
 
-            console.log(`[Ollama] Sending request to ${a1111Url}/api/chat`, { model, messagesCount: history.length });
-            const response = await fetch(`${a1111Url}/api/chat`, {
+            console.log(`[OpenRouter] Stream request for model: ${openRouterModel}`, { messagesCount: history.length });
+            const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`,
+                    'HTTP-Referer': 'http://localhost:3000',
+                    'X-Title': 'Veda AI Lab'
+                },
                 body: JSON.stringify({
-                    model: model || 'llama3:latest',
+                    model: openRouterModel,
                     messages: contextMessages,
-                    stream: true
+                    stream: true,
+                    max_tokens: 2048
                 })
             });
 
             if (!response.ok) {
-                console.error(`[Ollama] Error: ${response.status} ${response.statusText}`);
-                throw new Error(`Ollama Error: ${response.statusText}`);
+                console.error(`[OpenRouter] Error: ${response.status} ${response.statusText}`);
+                throw new Error(`OpenRouter Error: ${response.status} ${response.statusText}`);
             }
 
             const decoder = new TextDecoder();
             let assistantContent = "";
-            let buffer = ""; // Keep track of incomplete lines across chunks
+            let buffer = "";
 
             for await (const chunk of response.body) {
                 const text = decoder.decode(chunk, { stream: true });
@@ -192,29 +214,20 @@ router.post('/message', async (req, res) => {
                 buffer = lines.pop() || '';
 
                 for (const line of lines) {
-                    if (!line.trim()) continue;
-                    try {
-                        const json = JSON.parse(line);
-                        if (json.message && json.message.content) {
-                            const token = json.message.content;
-                            assistantContent += token;
-                            res.write(`data: ${JSON.stringify({ token })}\n\n`);
+                    if (!line.trim() || line.trim() === 'data: [DONE]') continue;
+                    if (line.startsWith('data: ')) {
+                        try {
+                            const json = JSON.parse(line.substring(6));
+                            if (json.choices && json.choices[0] && json.choices[0].delta && json.choices[0].delta.content) {
+                                const token = json.choices[0].delta.content;
+                                assistantContent += token;
+                                res.write(`data: ${JSON.stringify({ token })}\n\n`);
+                            }
+                        } catch (e) {
+                            // ignore fragment parsing error
                         }
-                    } catch (e) {
-                        // console.error("[Ollama] Parse Error on line:", line, e);
                     }
                 }
-            }
-
-            if (buffer.trim()) {
-                try {
-                    const json = JSON.parse(buffer);
-                    if (json.message && json.message.content) {
-                        const token = json.message.content;
-                        assistantContent += token;
-                        res.write(`data: ${JSON.stringify({ token })}\n\n`);
-                    }
-                } catch (e) { }
             }
 
             // Save Full Interaction to DB
@@ -257,19 +270,27 @@ async function triggerAutoTitle(history, chatId, content, model, isClaude) {
             });
             newTitle = response.content[0].text.trim();
         } else {
-            const a1111Url = process.env.OLLAMA_URL || "http://127.0.0.1:11434";
-            const titleRes = await fetch(`${a1111Url}/api/generate`, {
+            const apiKey = process.env.OPENROUTER_API_KEY;
+            if (!apiKey) return;
+
+            const titleRes = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`,
+                    'HTTP-Referer': 'http://localhost:3000',
+                    'X-Title': 'Veda AI Lab'
+                },
                 body: JSON.stringify({
-                    model: model || 'llama3:latest',
-                    prompt: titlePrompt,
-                    stream: false
+                    model: 'cognitivecomputations/dolphin3.0-r1-mistral-24b:free', // Fast model
+                    messages: [{ role: 'user', content: titlePrompt }],
+                    stream: false,
+                    max_tokens: 20
                 })
             });
             const titleJson = await titleRes.json();
-            if (titleJson.response) {
-                newTitle = titleJson.response.trim();
+            if (titleJson.choices && titleJson.choices[0]) {
+                newTitle = titleJson.choices[0].message.content.trim().replace(/^["']|["']$/g, '');
             }
         }
 

@@ -1,8 +1,8 @@
-﻿require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 const express = require('express');
 const cors = require('cors');
 const multer = require('multer');
-const path = require('path');
 const fs = require('fs');
 
 const app = express();
@@ -24,6 +24,11 @@ const upload = multer({ storage });
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Health Check Endpoint (Used by Frontend UI to verify connection)
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'online', node: 'TOGETHER_AI_CLOUD' });
+});
 
 // Request Logging Middleware
 app.use((req, res, next) => {
@@ -135,26 +140,35 @@ app.post('/api/completion', async (req, res) => {
             res.json({ reply: response.content[0].text });
 
         } else {
-            // Use 127.0.0.1 explicitly to avoid localhost resolution issues
-            const a1111Url = process.env.OLLAMA_URL || "http://127.0.0.1:11434";
+            const apiKey = process.env.OPENROUTER_API_KEY;
+            if (!apiKey) {
+                return res.json({ reply: "Error: Missing OPENROUTER_API_KEY in your .env file." });
+            }
 
-            console.log(`[Direct Completion] Request: "${prompt.substring(0, 20)}..."`);
+            console.log(`[OpenRouter] Direct Completion Request for: "${prompt.substring(0, 20)}..."`);
 
-            const response = await fetch(`${a1111Url}/api/generate`, {
+            const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`,
+                    'HTTP-Referer': 'http://localhost:3000',
+                    'X-Title': 'Veda AI Lab'
+                },
                 body: JSON.stringify({
-                    model: model || 'dolphin-llama3:latest',
-                    prompt: prompt,
-                    stream: false
+                    model: 'cognitivecomputations/dolphin3.0-r1-mistral-24b:free',
+                    messages: [{ role: 'user', content: prompt }],
+                    stream: false,
+                    max_tokens: 1024
                 })
             });
 
-            if (!response.ok) throw new Error(`Ollama Error: ${response.statusText}`);
+            if (!response.ok) throw new Error(`OpenRouter Error: ${response.statusText}`);
 
             const data = await response.json();
-            console.log("[Direct Completion] Success");
-            res.json({ reply: data.response });
+            const reply = data.choices && data.choices[0] ? data.choices[0].message.content : "Error generating reply.";
+            console.log("[OpenRouter] Direct Completion Success");
+            res.json({ reply });
         }
 
 
