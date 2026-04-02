@@ -45,8 +45,7 @@ export default function ImageStudio() {
                 body: JSON.stringify({
                     type: 'image',
                     prompt: prompt,
-                    model_id: activeModelId,
-                    target: 'novita'
+                    model_id: activeModelId
                 })
             });
 
