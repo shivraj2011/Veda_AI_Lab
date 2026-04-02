@@ -12,9 +12,10 @@ import { Mic, Music, Wand2, Terminal, Info, Zap, Settings, Volume2, Radio, Slide
 export default function VoiceGenerator() {
     const [status, setStatus] = useState<'idle' | 'generating' | 'completed'>('idle');
     const [progress, setProgress] = useState(0);
+    const [userPrompt, setUserPrompt] = useState("");
     const useCredits = useVedaStore((state) => state.useCredits);
 
-    const handleGenerate = () => {
+    const handleGenerate = (prompt: string) => {
         // 0. Deduct Credits
         const success = useCredits(2);
         if (!success) {
@@ -25,16 +26,22 @@ export default function VoiceGenerator() {
         setStatus('generating');
         setProgress(0);
 
-        const interval = setInterval(() => {
-            setProgress(prev => {
-                if (prev >= 100) {
-                    clearInterval(interval);
-                    setStatus('completed');
-                    return 100;
-                }
-                return prev + 10;
-            });
-        }, 200);
+        // REAL SYNTHESIS: Using Web Speech API (Free & Local)
+        const utterance = new SpeechSynthesisUtterance(prompt || "VEDA_VOICE_ACTIVE: STANDING_BY.");
+        utterance.rate = 0.9;
+        utterance.pitch = 0.8;
+        
+        utterance.onboundary = (event) => {
+            const progressVal = Math.floor((event.charIndex / (prompt.length || 1)) * 100);
+            setProgress(progressVal);
+        };
+
+        utterance.onend = () => {
+            setProgress(100);
+            setStatus('completed');
+        };
+
+        window.speechSynthesis.speak(utterance);
     };
 
     return (
@@ -78,11 +85,27 @@ export default function VoiceGenerator() {
                             <div className="flex items-center justify-between">
                                 <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-500 flex items-center gap-4">
                                     <div className="w-2 h-2 rounded-full bg-[#00f2ff] shadow-[0_0_10px_#00f2ff]"></div>
-                                    Tone_Modulation
+                                    Neural_Output_Script
                                 </h3>
                                 <Sliders className="w-4 h-4 text-gray-800" />
                             </div>
-                            <PromptAlchemist activeTool="voice" />
+                            
+                            <div className="relative group">
+                                <textarea
+                                    value={userPrompt}
+                                    onChange={(e) => setUserPrompt(e.target.value)}
+                                    placeholder="Enter vocal sequence or neural script..."
+                                    className="w-full h-32 bg-white/[0.02] border border-white/10 rounded-2xl p-5 text-gray-300 text-sm placeholder:text-gray-700 focus:outline-none focus:border-[#10b981]/50 transition-all resize-none custom-scrollbar uppercase tracking-tight italic"
+                                />
+                                <div className="absolute bottom-4 right-4 text-[8px] font-black text-gray-800 uppercase tracking-widest bg-black/40 px-2 py-1 rounded-md border border-white/5 backdrop-blur-md">
+                                    CHAR_SYNTH: {userPrompt.length}
+                                </div>
+                            </div>
+
+                            <PromptAlchemist 
+                                activeTool="voice" 
+                                onEnhance={(enhanced) => setUserPrompt(enhanced)}
+                            />
                         </div>
 
                         {/* Audio Metrics HUD */}
@@ -105,7 +128,7 @@ export default function VoiceGenerator() {
 
                         {/* Voice Synthesis Action */}
                         <button
-                            onClick={handleGenerate}
+                            onClick={() => handleGenerate(userPrompt)}
                             disabled={status === 'generating'}
                             className="w-full py-7 bg-gradient-to-r from-[#050505] to-[#111] border border-white/20 rounded-[2rem] text-white font-black uppercase tracking-[0.4em] text-[10px] hover:neon-border-glow active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed group relative overflow-hidden"
                         >

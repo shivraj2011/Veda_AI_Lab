@@ -28,6 +28,7 @@ interface VedaState {
     setUserName: (name: string) => void;
     setProfileImage: (image: string | null) => void;
     useCredits: (amount: number, isNsfw?: boolean) => boolean;
+    addCredits: (amount: number) => void;
     refreshCredits: () => void;
 }
 
@@ -60,6 +61,8 @@ export const useVedaStore = create<VedaState>()(
                 }
                 return true;
             },
+            
+            addCredits: (amount) => set((state) => ({ credits: state.credits + amount })),
 
             refreshCredits: () => {
                 const now = Date.now();

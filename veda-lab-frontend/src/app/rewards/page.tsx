@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { TopBar } from '@/components/layout/TopBar';
 import { Gift, Zap, Star, History, ArrowRight, CheckCircle2, Play, Gamepad2, Coins } from 'lucide-react';
+import { useVedaStore } from '@/lib/store';
 import { FadeInBlock } from '@/components/ui/animated/GlowButton';
 import { useState } from 'react';
 
@@ -28,6 +29,8 @@ const plans = [
 
 export default function RewardsPage() {
     const [activeTab, setActiveTab] = useState<'plans' | 'earn'>('plans');
+    const [isAdActive, setIsAdActive] = useState(false);
+    const addCredits = useVedaStore((state) => state.addCredits);
 
     return (
         <main className="flex-1 flex flex-col relative overflow-hidden">
@@ -125,7 +128,10 @@ export default function RewardsPage() {
                     <FadeInBlock delay={0.1}>
                         <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto mb-20">
                             {/* WATCH ADS CARD */}
-                            <div className="bg-[#020202] border border-white/5 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden group hover:neon-border-glow transition-all cursor-pointer">
+                            <div 
+                                onClick={() => setIsAdActive(true)}
+                                className="bg-[#020202] border border-white/5 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden group hover:neon-border-glow transition-all cursor-pointer"
+                            >
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-[60px] rounded-full"></div>
                                 <div className="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center border border-blue-500/20 mb-8 group-hover:scale-110 transition-transform">
                                     <Play className="w-8 h-8 text-blue-400 fill-blue-400/20" />
@@ -138,6 +144,36 @@ export default function RewardsPage() {
                                 </div>
                                 <button className="w-full py-6 bg-white/5 border border-white/10 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-all italic">INITIALIZE_STREAM</button>
                             </div>
+
+                {/* AD REWARD MODAL */}
+                {isAdActive && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/90 backdrop-blur-3xl animate-in fade-in duration-500">
+                        <div className="w-full max-w-2xl bg-[#020202] border border-white/10 rounded-[3rem] p-12 relative overflow-hidden shadow-[0_0_100px_rgba(0,242,255,0.1)]">
+                            <div className="absolute top-0 left-0 w-full h-1 bg-white/5">
+                                <motion.div 
+                                    initial={{ width: 0 }}
+                                    animate={{ width: "100%" }}
+                                    transition={{ duration: 15, ease: "linear" }}
+                                    onAnimationComplete={() => {
+                                        addCredits(50);
+                                        setIsAdActive(false);
+                                        alert("NEURAL_RECHARGE_COMPLETE: +50 CREDITS ADDED.");
+                                    }}
+                                    className="h-full bg-gradient-to-r from-[#00f2ff] to-[#a855f7]"
+                                />
+                            </div>
+
+                            <div className="flex flex-col items-center text-center space-y-8 py-10">
+                                <div className="w-24 h-24 rounded-full bg-white/5 border border-white/10 flex items-center justify-center animate-pulse">
+                                    <Zap className="w-10 h-10 text-[#00f2ff]" />
+                                </div>
+                                <h1 className="text-4xl font-black uppercase italic tracking-tighter">Neural_Stream_Active</h1>
+                                <p className="text-gray-500 font-medium italic opacity-60">Synchronizing with the neural advertising network. Do not close the conduit.</p>
+                                <div className="text-[10px] font-black uppercase tracking-[0.4em] text-[#00f2ff]/40">ESTABLISHING_CONDUIT...</div>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                             {/* PLAY GAMES CARD */}
                             <div className="bg-[#020202] border border-white/5 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden group hover:neon-border-glow transition-all cursor-pointer">

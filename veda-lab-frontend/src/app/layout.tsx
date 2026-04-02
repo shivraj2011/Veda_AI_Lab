@@ -1,4 +1,4 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { Geist } from 'next/font/google';
 import './globals.css';
 
@@ -26,6 +26,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${geist.variable}`}>
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000"
+          crossOrigin="anonymous"
+        ></script>
+      </head>
       <body
         className="h-screen w-screen flex text-sm selection:bg-blue-500 selection:text-white bg-grid overflow-hidden"
         suppressHydrationWarning
