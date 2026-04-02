@@ -18,3 +18,4 @@
 2026-04-02T08:02:17Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveP256] connIndex=0 event=0 ip=198.41.200.23
 2026-04-02T08:02:17Z INF ICMP proxy will use 2401:4900:8846:705b:e65:cbde:47ff:67e7 in zone Wi-Fi as source for IPv6
 2026-04-02T08:02:17Z INF Starting metrics server on 127.0.0.1:20241/metrics
+2026-04-02T08:02:18Z INF Registered tunnel connection connIndex=0 connection=fcdfe5a8-864c-4f00-aff8-4e512258ef33 event=0 ip=198.41.200.23 location=del04 protocol=quic

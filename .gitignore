@@ -8,6 +8,7 @@ node_modules/
 dist/
 .env
 .env.*
+VEDA_KEYS_STORAGE.md
 .venv/
 venv/
 stable-diffusion-webui/
