@@ -31,7 +31,91 @@ router.post('/', async (req, res) => {
         // 2. Perform Generation in Background
         (async () => {
             try {
-                if (target === 'comfyui') {
+                if (target === 'novita' || (!target && process.env.NOVITA_API_KEY)) {
+                    const novitaKey = process.env.NOVITA_API_KEY;
+                    if (!novitaKey) throw new Error("Novita API Key not found in .env");
+
+                    // Model Mapping Logic
+                    let novitaModel = 'sd_xl_base_1.0.safetensors';
+                    if (model_id === 'Veda-flux') novitaModel = 'flux-schnell.safetensors';
+                    else if (model_id === 'Veda-pony') novitaModel = 'ponyDiffusionV6XL_v6-6.safetensors';
+                    else if (model_id === 'Veda-illustrious') novitaModel = 'illustrious_xl_v10.safetensors';
+                    else if (model_id === 'Veda-comic') novitaModel = 'animagineXLV3_v30.safetensors';
+                    else if (model_id === 'Veda-v15') novitaModel = 'sd_v1.5.safetensors';
+
+                    console.log(`[Novita] Dispatching ${model_id} -> ${novitaModel}`);
+
+                    // 1. Start Async Task
+                    const startRes = await fetch("https://api.novita.ai/v3/async/txt2img", {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${novitaKey}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            model_name: novitaModel,
+                            prompt: prompt,
+                            negative_prompt: "blurry, low quality, distorted, ugly, watermark",
+                            width: 1024,
+                            height: 1024,
+                            image_num: 1,
+                            steps: 30,
+                            seed: -1,
+                            guidance_scale: 7.5
+                        })
+                    });
+
+                    if (!startRes.ok) throw new Error(`Novita Start Error: ${startRes.statusText}`);
+                    const { task_id } = await startRes.json();
+                    if (!task_id) throw new Error("Novita failed to return a task_id");
+
+                    // 2. Poll for Result
+                    let imageUrl = null;
+                    let pollAttempts = 0;
+                    while (!imageUrl && pollAttempts < 30) {
+                        await new Promise(r => setTimeout(r, 2000));
+                        console.log(`[Novita] Polling task ${task_id}... (${pollAttempts}/30)`);
+                        
+                        const pollRes = await fetch(`https://api.novita.ai/v3/async/task-result?task_id=${task_id}`, {
+                            headers: { 'Authorization': `Bearer ${novitaKey}` }
+                        });
+                        const pollData = await pollRes.json();
+                        
+                        if (pollData.task && pollData.task.status === 'TASK_STATUS_COMPLETED') {
+                            imageUrl = pollData.images[0].image_url;
+                        } else if (pollData.task && pollData.task.status === 'TASK_STATUS_FAILED') {
+                            throw new Error(`Novita Task Failed: ${pollData.task.reason}`);
+                        }
+                        pollAttempts++;
+                    }
+
+                    if (!imageUrl) throw new Error("Novita polling timed out");
+
+                    // 3. Download and Persist Locally (For Gallery Compatibility)
+                    const imgResponse = await fetch(imageUrl);
+                    const buffer = await imgResponse.arrayBuffer();
+                    
+                    const fs = require('fs');
+                    const path = require('path');
+                    const gensDir = path.join(process.cwd(), 'public', 'generations');
+                    if (!fs.existsSync(gensDir)) fs.mkdirSync(gensDir, { recursive: true });
+
+                    const localFilename = `gen-${Date.now()}.png`;
+                    fs.writeFileSync(path.join(gensDir, localFilename), Buffer.from(buffer));
+
+                    // 4. Update Database
+                    await prisma.generation.create({
+                        data: {
+                            type: 'image',
+                            prompt,
+                            model_id: model_id,
+                            output_path: `/generations/${localFilename}`,
+                            parameters: JSON.stringify(parameters || {})
+                        }
+                    });
+                    console.log(`[Novita] Cloud Generation saved: ${localFilename}`);
+
+                } else if (target === 'comfyui') {
                     const comfyUrl = process.env.COMFY_API_URL || "http://127.0.0.1:8188";
 
                     // Load Image Template

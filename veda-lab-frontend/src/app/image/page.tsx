@@ -45,7 +45,7 @@ export default function ImageStudio() {
                     type: 'image',
                     prompt: prompt,
                     model_id: activeModelId,
-                    target: 'comfyui'
+                    target: 'novita'
                 })
             });
 
