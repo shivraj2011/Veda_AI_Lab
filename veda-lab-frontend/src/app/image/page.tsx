@@ -1,4 +1,5 @@
 'use client';
+// Veda AI Lab Deploy: 2026-04-02-LOCAL-COMM-REPAIR
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
